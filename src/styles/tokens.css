@@ -1,0 +1,159 @@
+/* Giddens Systems — design tokens
+   Single source of truth. Nothing in this codebase uses a raw hex, px type size,
+   or arbitrary spacing value. If you need something that isn't here, the answer is
+   almost always that you don't need it. Adding a token is a design decision, not a
+   convenience — it goes through docs/creative-direction.md first. */
+
+:root {
+  /* ---- Color ------------------------------------------------------------ */
+  /* Cool steel ground. Warm orange marking. The tension is deliberate. */
+
+  --steel-950: #10171C;  /* page ground */
+  --steel-900: #172128;  /* section surface */
+  --steel-800: #24323A;  /* raised surface, inputs, screenshot frames */
+  --steel-600: #3D4E58;  /* hairline rules, borders, diagram strokes */
+  --steel-400: #7D8B93;  /* secondary text, annotations, captions */
+  --chalk-200: #D9D4CC;  /* body text */
+  --chalk-050: #FAF8F5;  /* headlines, maximum contrast */
+  --signal-500: #E2542C; /* accent — max 2 appearances per viewport */
+  --signal-700: #B33D1C; /* accent pressed/active ONLY, never a fill */
+
+  /* Semantic aliases — prefer these at call sites over the raw ramp. */
+  --bg-page: var(--steel-950);
+  --bg-section: var(--steel-900);
+  --bg-raised: var(--steel-800);
+  --rule: var(--steel-600);
+  --text-muted: var(--steel-400);
+  --text-body: var(--chalk-200);
+  --text-display: var(--chalk-050);
+  --accent: var(--signal-500);
+  --accent-pressed: var(--signal-700);
+
+  /* ---- Type ------------------------------------------------------------- */
+  /* Three faces, three jobs. Self-hosted via @fontsource — no CDN request. */
+
+  --font-display: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --font-body: 'Instrument Sans Variable', 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Display width axis. This is the signature typographic move — expanded
+     grotesk headlines. Never set display type at default width. */
+  --display-width: 118;
+
+  /* Scale has deliberate contrast, not even steps. The jump from display to
+     body is enormous on purpose. Even progressions (48/36/24/16) are a tell. */
+  --size-display-xl: clamp(2.75rem, 6.5vw, 5.25rem);
+  --size-display: clamp(2rem, 4vw, 3.25rem);
+  --size-h2: clamp(1.5rem, 2.4vw, 2rem);
+  --size-h3: 1.1875rem;
+  --size-body: 1.0625rem;   /* 17px — deliberately not 16 */
+  --size-small: 0.9375rem;
+  --size-mono: 0.6875rem;   /* 11px — utility text only */
+
+  --leading-display: 0.98;
+  --leading-heading: 1.15;
+  --leading-body: 1.6;
+
+  --track-display: -0.025em;
+  --track-heading: -0.015em;
+  --track-body: 0;
+  --track-mono: 0.08em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-display: 700;
+
+  /* ---- Space ------------------------------------------------------------ */
+  /* 4px base. Section rhythm uses three distinct values, assigned by section
+     weight — uniform section padding across a page is an AI signature. */
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+  --space-2xl: clamp(3.5rem, 7vw, 5.5rem);   /* light section */
+  --space-3xl: clamp(5rem, 10vw, 8rem);      /* standard section */
+  --space-4xl: clamp(7rem, 14vw, 11rem);     /* hero, final CTA */
+
+  --measure: 62ch;         /* max body line length */
+  --width-content: 1200px;
+
+  /* ---- Form ------------------------------------------------------------- */
+  /* Near-zero radius. Rounded cards are the most recognizable AI tell there is. */
+
+  --radius: 2px;
+  --radius-none: 0;
+  --rule-weight: 0.5px;
+  --border-emphasis: 1px;
+
+  /* ---- Motion ----------------------------------------------------------- */
+  /* Budget: two moments on the entire site. See creative-direction.md. */
+
+  --dur-fast: 140ms;
+  --dur-base: 260ms;
+  --dur-assembly: 900ms;
+  --ease-out: cubic-bezier(.2, .7, .3, 1);
+  --stagger: 100ms;
+
+  /* ---- Focus ------------------------------------------------------------ */
+  --focus-ring: 2px solid var(--signal-500);
+  --focus-offset: 2px;
+}
+
+/* No dark mode toggle. The site is one thing. A theme switcher nobody asked for
+   is a tell, and it doubles the surface area of every design decision. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body { margin: 0; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' var(--display-width);
+  font-weight: var(--weight-display);
+  color: var(--text-display);
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--size-display-xl); line-height: var(--leading-display); letter-spacing: var(--track-display); }
+h2 { font-size: var(--size-display);    line-height: var(--leading-heading); letter-spacing: var(--track-display); }
+h3 { font-size: var(--size-h2);         line-height: var(--leading-heading); letter-spacing: var(--track-heading); }
+
+p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+
+/* Utility text. Data, labels, figure numbers, nav — things that genuinely are
+   machine-set. Never a headline, never body copy, never for flavor. */
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--size-mono);
+  letter-spacing: var(--track-mono);
+  color: var(--text-muted);
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
