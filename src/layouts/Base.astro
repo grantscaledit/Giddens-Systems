@@ -11,6 +11,13 @@ interface Props {
 }
 
 const { title, description, noindex = false } = Astro.props;
+
+// Dev-only outline marking [[PH: ]] placeholder copy so it's visible while
+// building. Uses set:html to bypass Astro's static CSS extraction, so this
+// never ends up in a production stylesheet.
+const devPlaceholderStyles = import.meta.env.DEV
+	? '[data-ph] { outline: 1px dashed var(--signal-500); outline-offset: 2px; }'
+	: '';
 ---
 
 <html lang="en">
@@ -23,6 +30,7 @@ const { title, description, noindex = false } = Astro.props;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		{devPlaceholderStyles && <style set:html={devPlaceholderStyles} />}
 	</head>
 	<body>
 		<slot />

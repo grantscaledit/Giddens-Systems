@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && rm -rf dist/dev",
+    "check:copy": "! grep -rn '\\[\\[PH:' src/ --include='*.astro' || (echo '\\nPLACEHOLDER COPY FOUND — cannot ship\\n' && exit 1)",
+    "build": "npm run check:copy && astro build && rm -rf dist/dev",
     "preview": "astro preview",
     "astro": "astro"
   },

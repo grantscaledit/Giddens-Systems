@@ -9,8 +9,10 @@ Locked 2026-08-04. Changes to this doc require a deliberate decision, not a drif
 
 ## Brief
 
-A two-brother systems shop in North Texas building CRM, automation, and AI intake
-infrastructure for service businesses where one customer is worth $5,000-$10,000.
+A two-brother systems shop in North Texas that builds one connected system for service
+businesses — an SEO-structured website, a configured GoHighLevel CRM, and AI call
+intake, sold and delivered as a single machine rather than as separate services. One
+customer is worth $5,000-$10,000.
 
 **The site's single job:** make a skeptical owner of a $500k-$3M service business
 believe these two can be trusted with the machinery that runs their revenue.
@@ -233,6 +235,9 @@ them to check.
 
 Banned words: seamless, unlock, empower, leverage, transform, revolutionize,
 cutting-edge, next-generation, game-changing, robust, elevate, supercharge, effortless.
+
+Never describe the offer as separate products or a menu of services; it is one system
+with three named parts.
 
 ---
 

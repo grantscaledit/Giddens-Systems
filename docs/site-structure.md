@@ -13,14 +13,15 @@ about page until the single page is finished and converting.
 |---|---|---|---|
 | 00 | Nav | — | Wordmark, three links, one CTA |
 | 01 | Hero | `--space-4xl` | The claim + the exploded assembly |
-| 02 | Proof band | `--space-2xl` | Three real numbers. Carries the credibility |
-| 03 | What we build | `--space-3xl` | Three services, editorial list — NOT an icon grid |
+| 02 | Proof band | `--space-2xl` | Three real numbers |
+| 03 | The system | `--space-3xl` | One machine, three parts — front door, engine, mouth |
 | 04 | Case study 01 | `--space-3xl` | Screenshot + real result |
 | 05 | Case study 02 | `--space-3xl` | Screenshot + real result |
-| 06 | How it works | `--space-2xl` | Four steps. Numbered because it IS a sequence |
-| 07 | Material band | `0` | Full-bleed texture. The one warm moment |
-| 08 | Final CTA | `--space-4xl` | The only centered element on the site |
-| 09 | Footer | `--space-2xl` | Contact, location, revision stamp |
+| 06 | How it works | `--space-2xl` | Four steps |
+| 07 | Pricing | `--space-3xl` | Three tiers + a custom block |
+| 08 | Material band | `0` | Full-bleed texture |
+| 09 | Final CTA | `--space-4xl` | Only centered element on the site |
+| 10 | Footer | `--space-2xl` | Contact, location, revision stamp |
 
 Note the padding column: three distinct values, assigned by weight. Uniform section
 spacing is a tell — this is the fix, and it must survive review.
@@ -54,9 +55,10 @@ scale, hairline-separated. This section replaces the missing team photography an
 load-bearing. **Numbers must be real and verifiable.** If a number doesn't exist yet,
 the section waits — it does not get a placeholder.
 
-**03 · What we build** — Three services as a stacked editorial list, not a grid. Each
-row: large monospace index, display-scale service name, one paragraph. Full-width
-hairline between rows. Explicitly not three cards in a row with icons.
+**03 · The system** — No longer three parallel services. One system in three named
+parts. Section intro paragraph, then three stacked rows: monospace index, display-scale
+part name ("The front door" / "The engine" / "The mouth"), one paragraph, one short
+closing line. Full-width hairline between rows. Explicitly not three cards in a row.
 
 **04-05 · Case studies** — Asymmetric: screenshot at columns 1-6, text at 8-12 for the
 first, mirrored for the second. Screenshot inset in a `--steel-800` frame with a
@@ -68,21 +70,35 @@ one number.
 because the content genuinely is a sequence; do not use numbered markers anywhere the
 order doesn't carry information.
 
-**07 · Material band** — Full-bleed, 21:9, zero padding, no text over it. Under 800KB.
+**07 · Pricing** — Three tier blocks plus a fourth, price-less "Bigger operation?"
+block. Hairline-bordered, zero radius, no shadow, no fill. The Growth tier is marked as
+recommended using a `--steel-800` raised surface and a `--signal-500` hairline top
+border — never a colored background fill. Tier names in JetBrains Mono, prices in
+Archivo at `--size-h2`, feature lists in Instrument Sans. Build-fee line sits above the
+tiers. Ads footnote below, in `--steel-400`. Stacks vertically below 700px in the same
+order.
+
+**Accent budget for section 07** — this is the constraint most likely to be violated.
+Exactly two appearances: the `--signal-500` hairline on the Growth tier, and one CTA
+button at the bottom of the section. There is no CTA button inside individual tier
+cards — one button for the whole section. If you find yourself wanting a third orange
+element, that's the signal to stop.
+
+**08 · Material band** — Full-bleed, 21:9, zero padding, no text over it. Under 800KB.
 Poster frame under reduced motion. Its only job is to give the page one moment of
 physical warmth.
 
-**08 · Final CTA** — The single centered element on the site. Display headline,
+**09 · Final CTA** — The single centered element on the site. Display headline,
 `--signal-500` button, monospace qualifier. This is the second and last appearance of
 the accent in this viewport.
 
-**09 · Footer** — Contact, McKinney TX, monospace revision stamp. Hairline above.
+**10 · Footer** — Contact, McKinney TX, monospace revision stamp. Hairline above.
 
 ---
 
 ## Component inventory
 
-Twelve. Build these and nothing else. A thirteenth component is a conversation, not a
+Fourteen. Build these and nothing else. A fifteenth component is a conversation, not a
 decision made mid-build.
 
 1. `Nav`
@@ -97,9 +113,11 @@ decision made mid-build.
 10. `StepRow` — number, title, description
 11. `Button` — primary (filled) and secondary (outlined)
 12. `Footer`
+13. `PriceTier` — tier block, recommended state via raised surface + hairline
+14. `PriceFeatureList` — feature list inside a tier
 ### Shell and development pages
 
-The twelve above are page *sections*. These are separate and permanent:
+The fourteen above are page *sections*. These are separate and permanent:
 
 - `src/layouts/Base.astro` — the shell. Holds `<head>`, meta, the three
   `@fontsource-variable` imports, and the `tokens.css` import. Every page wraps
@@ -139,9 +157,10 @@ before the next begins.
 5. Proof band.
 6. Case studies (both).
 7. Services + How it works.
-8. Material band.
-9. Final CTA.
-10. Full review at 1440 / 768 / 375. Lighthouse. Keyboard pass. Reduced-motion pass.
+8. Pricing.
+9. Material band.
+10. Final CTA.
+11. Full review at 1440 / 768 / 375. Lighthouse. Keyboard pass. Reduced-motion pass.
 
 ---
 

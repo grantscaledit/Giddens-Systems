@@ -43,6 +43,7 @@ direction. If you catch yourself writing one, stop and re-read the direction doc
 - More than **two** appearances of `--signal-500` in a single viewport
 - `--signal-700` used as a fill (pressed/active states only)
 - Opacity used to fake a color that should be a token
+- Colored background fills on tier cards
 
 ### Layout and form
 - `border-radius` above `2px`
@@ -52,6 +53,7 @@ direction. If you catch yourself writing one, stop and re-read the direction doc
 - Three-column feature grid with icons in rounded squares
 - Uniform section padding across the page. Use all three of `--space-2xl/3xl/4xl`
 - Full-bleed client screenshots, or screenshots exceeding 60% of section width
+- CTA buttons inside individual pricing tier cards
 
 ### Type
 - **Inter.** Anywhere. For any reason
@@ -72,6 +74,7 @@ direction. If you catch yourself writing one, stop and re-read the direction doc
 - Lorem ipsum. If copy doesn't exist, stop and ask — do not invent placeholder claims
 - Fake client logos, fake testimonials, invented metrics, "Trusted by" strips
 - Icons standing in where proof should be
+- Describing the offer as three separate services, a menu, or a service list
 - Banned words: seamless, unlock, empower, leverage, transform, revolutionize,
   cutting-edge, next-generation, game-changing, robust, elevate, supercharge, effortless
 - Exclamation points
@@ -95,7 +98,8 @@ direction. If you catch yourself writing one, stop and re-read the direction doc
 - Explicit `width`/`height` on every image (no layout shift)
 - Semantic HTML. `<button>` for actions, `<a>` for navigation, real `<h1>`-`<h3>` order
 - Text contrast ≥ 4.5:1. `--steel-400` on `--steel-900` is the tightest pair — verify it
-- All copy comes from docs/copy.md. Never invent or draft copy."
+- All copy comes verbatim from docs/copy.md. Never invent, draft, adjust, or improve copy.
+- Content wrapped in `[[PH: ]]` is placeholder and must render inside `<span data-ph>`.
 
 ---
 
