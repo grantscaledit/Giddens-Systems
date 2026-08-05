@@ -38,6 +38,16 @@ hairline rule. Display headline at columns 1-7, max 560px. Body subhead at max 4
 The exploded assembly below, full content width. CTA + a monospace qualifier line.
 The assembly is the signature — see the direction doc. This section takes as long as it
 takes; it is 60% of the site's impression.
+**Assembly responsive behavior.** The assembly has two distinct compositions, not one
+that scales. Above 700px: horizontal, five parts on a horizontal axis, labels beneath.
+Below 700px: vertical, five parts stacked on a vertical axis, leader lines running
+horizontally, labels beside each part. The viewBox aspect changes with the composition
+(roughly 1200×240 vs 400×900) so annotation text stays proportionally legible without
+any scaling compensation. Labels must measure at least 11px at 375px — verify with
+`getBoundingClientRect()`, not by eye.
+
+Diagram linework uses `--diagram-stroke` (1px), not `--rule-weight` — 0.5px renders
+sub-pixel and inconsistent inside a scaled viewBox.
 
 **02 · Proof band** — Three metrics from real client work, monospace numerals at display
 scale, hairline-separated. This section replaces the missing team photography and it is
@@ -87,7 +97,32 @@ decision made mid-build.
 10. `StepRow` — number, title, description
 11. `Button` — primary (filled) and secondary (outlined)
 12. `Footer`
+### Shell and development pages
 
+The twelve above are page *sections*. These are separate and permanent:
+
+- `src/layouts/Base.astro` — the shell. Holds `<head>`, meta, the three
+  `@fontsource-variable` imports, and the `tokens.css` import. Every page wraps
+  in it. Fonts and tokens are never imported per-page.
+- `src/pages/dev/typecheck.astro` — renders Archivo at `wdth` 62/100/118/125 plus
+  samples of all three faces, to prove variable fonts are loading and not silently
+  falling back to static.
+- `src/pages/dev/assembly.astro` — isolated preview of `ExplodedAssembly` with a
+  replay control and three states: default, reduced-motion, static final frame.
+
+**`dev/` is routable locally, stripped at build time.** Files under `src/pages/dev/`
+are real Astro routes on purpose, so they can actually be opened in a browser during
+development — `npm run dev` serves them at `/dev/typecheck` and `/dev/assembly`. The
+production build (`package.json`'s `build` script) deletes `dist/dev` after `astro
+build` runs, so neither route reaches Cloudflare Pages. Both pages also carry
+`<meta name="robots" content="noindex, nofollow">` as a second layer of protection.
+
+**Do not underscore-prefix these files.** Astro excludes any `_`-prefixed file in
+`src/pages/` from routing entirely, which would make them impossible to open in a
+dev-server browser tab — the opposite of what they're for.
+
+**These are permanent, not scratch.** Do not delete them once components are placed.
+They are regression checks.
 ---
 
 ## Build sequence

@@ -81,6 +81,8 @@
   --measure: 62ch;         /* max body line length */
   --width-content: 1200px;
 
+  --gutter: clamp(1.25rem, 4vw, 3rem);   /* horizontal page padding */
+
   /* ---- Form ------------------------------------------------------------- */
   /* Near-zero radius. Rounded cards are the most recognizable AI tell there is. */
 
@@ -88,6 +90,8 @@
   --radius-none: 0;
   --rule-weight: 0.5px;
   --border-emphasis: 1px;
+  --diagram-stroke: 1px; /* diagram linework; --rule-weight (0.5px) renders
+                            sub-pixel and inconsistent inside a scaled viewBox */
 
   /* ---- Motion ----------------------------------------------------------- */
   /* Budget: two moments on the entire site. See creative-direction.md. */

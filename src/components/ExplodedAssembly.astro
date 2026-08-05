@@ -1,0 +1,344 @@
+---
+// The signature element. Five stages of the revenue pipeline laid along an
+// axis like a figure from a service manual. Collapses to center, slides
+// apart once on load. Component 02 (ai intake) is the differentiator and
+// the only --signal-500 in this diagram.
+//
+// Two compositions, not one scaled layout: above 700px the axis runs
+// horizontal; below it, vertical, with proportionally larger text — the way
+// a service manual re-lays a wide figure for a narrow page rather than
+// shrinking it. Same part data drives both; only the axis orientation and
+// each part's along-axis length differ, because the two live in
+// differently-scaled viewBoxes.
+//
+// Every part has a distinct silhouette: its own along-axis length (the ai
+// intake module is a different object from the crm record, not a recolored
+// clone), a notch where the axis physically enters and exits it, and one
+// internal division line offset off-center. Shared thickness and shared
+// axis keep the row reading as one system despite the variation.
+
+interface Part {
+	num: string;
+	label: string;
+	alongH: number;
+	alongV: number;
+	dividerFrac: number;
+	accent?: boolean;
+}
+
+const parts: Part[] = [
+	{ num: '01', label: 'missed call', alongH: 64, alongV: 46, dividerFrac: -0.28 },
+	{ num: '02', label: 'ai intake', alongH: 104, alongV: 72, dividerFrac: 0.18, accent: true },
+	{ num: '03', label: 'qualify', alongH: 78, alongV: 54, dividerFrac: -0.32 },
+	{ num: '04', label: 'crm record', alongH: 92, alongV: 64, dividerFrac: 0.22 },
+	{ num: '05', label: 'booked job', alongH: 70, alongV: 48, dividerFrac: -0.15 },
+];
+
+// Rectangle with an inward triangular notch cut into the two edges the axis
+// passes through — the along-axis extremities.
+function hShapePath(along: number, thick: number, nd: number, nw: number) {
+	const hx = along / 2;
+	const hy = thick / 2;
+	const hn = nw / 2;
+	return `M ${-hx} ${-hy} L ${hx} ${-hy} L ${hx} ${-hn} L ${hx - nd} 0 L ${hx} ${hn} L ${hx} ${hy} L ${-hx} ${hy} L ${-hx} ${hn} L ${-hx + nd} 0 L ${-hx} ${-hn} Z`;
+}
+
+function vShapePath(along: number, thick: number, nd: number, nw: number) {
+	const hx = thick / 2;
+	const hy = along / 2;
+	const hn = nw / 2;
+	return `M ${-hx} ${-hy} L ${-hn} ${-hy} L 0 ${-hy + nd} L ${hn} ${-hy} L ${hx} ${-hy} L ${hx} ${hy} L ${hn} ${hy} L 0 ${hy - nd} L ${-hn} ${hy} L ${-hx} ${hy} Z`;
+}
+
+// --- Horizontal composition (>=700px) ---
+const hCenterX = 600;
+const hAxisY = 150;
+const hThick = 56;
+const hNotchDepth = 9;
+const hNotchWidth = 16;
+const hFinalX = [100, 350, 600, 850, 1100];
+const hLeaderTopY = 90;
+const hNumY = 78;
+const hLabelY = 202;
+
+// --- Vertical composition (<700px) ---
+const vCenterY = 380;
+const vAxisX = 90;
+const vThick = 44;
+const vNotchDepth = 7;
+const vNotchWidth = 13;
+const vFinalY = [90, 235, 380, 525, 670];
+const vLeaderRightX = 150;
+const vNumX = 158;
+---
+
+<div class="assembly-wrap">
+<svg
+	class="assembly assembly--h"
+	viewBox="0 0 1200 240"
+	role="img"
+	aria-labelledby="assembly-title-h assembly-desc-h"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<title id="assembly-title-h">Exploded assembly of the Giddens Systems revenue pipeline</title>
+	<desc id="assembly-desc-h">
+		Five stages connected along a single axis: a missed call, ai intake, qualifying the lead, the
+		crm record, and the booked job. Ai intake is marked as the differentiator.
+	</desc>
+
+	<line class="axis-half" x1={hCenterX} y1={hAxisY} x2={60} y2={hAxisY} pathLength="100" />
+	<line class="axis-half" x1={hCenterX} y1={hAxisY} x2={1140} y2={hAxisY} pathLength="100" />
+
+	{
+		parts.map((part, i) => {
+			const fx = hFinalX[i];
+			const divX = (part.alongH / 2) * part.dividerFrac;
+			const divInset = hThick / 2 - 6;
+			return (
+				<g class="part" style={`--index: ${i}`}>
+					<g class="part-anchor" transform={`translate(${fx}, 0)`}>
+						<g class="part-slide part-slide--x" style={`--slide-from: ${hCenterX - fx}px`}>
+							<path
+								class:list={['part-body', part.accent && 'part-body--accent']}
+								transform={`translate(0, ${hAxisY})`}
+								d={hShapePath(part.alongH, hThick, hNotchDepth, hNotchWidth)}
+							/>
+							<line
+								class:list={['part-divider', part.accent && 'part-divider--accent']}
+								x1={divX}
+								y1={hAxisY - divInset}
+								x2={divX}
+								y2={hAxisY + divInset}
+							/>
+							<line
+								class:list={['annotation', 'leader', part.accent && 'leader--accent']}
+								x1={0}
+								y1={hAxisY - hThick / 2}
+								x2={0}
+								y2={hLeaderTopY}
+							/>
+							<text
+								class:list={['annotation', 'mono', 'part-num', part.accent && 'part-num--accent']}
+								x={0}
+								y={hNumY}
+								text-anchor="middle"
+							>
+								{part.num}
+							</text>
+							<text class="annotation mono part-label" x={0} y={hLabelY} text-anchor="middle">
+								{part.label}
+							</text>
+						</g>
+					</g>
+				</g>
+			);
+		})
+	}
+</svg>
+
+<svg
+	class="assembly assembly--v"
+	viewBox="0 0 340 760"
+	role="img"
+	aria-labelledby="assembly-title-v assembly-desc-v"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<title id="assembly-title-v">Exploded assembly of the Giddens Systems revenue pipeline</title>
+	<desc id="assembly-desc-v">
+		Five stages connected along a single axis: a missed call, ai intake, qualifying the lead, the
+		crm record, and the booked job. Ai intake is marked as the differentiator.
+	</desc>
+
+	<line class="axis-half" x1={vAxisX} y1={vCenterY} x2={vAxisX} y2={50} pathLength="100" />
+	<line class="axis-half" x1={vAxisX} y1={vCenterY} x2={vAxisX} y2={710} pathLength="100" />
+
+	{
+		parts.map((part, i) => {
+			const fy = vFinalY[i];
+			const divY = (part.alongV / 2) * part.dividerFrac;
+			const divInset = vThick / 2 - 5;
+			return (
+				<g class="part" style={`--index: ${i}`}>
+					<g class="part-anchor" transform={`translate(0, ${fy})`}>
+						<g class="part-slide part-slide--y" style={`--slide-from: ${vCenterY - fy}px`}>
+							<path
+								class:list={['part-body', part.accent && 'part-body--accent']}
+								transform={`translate(${vAxisX}, 0)`}
+								d={vShapePath(part.alongV, vThick, vNotchDepth, vNotchWidth)}
+							/>
+							<line
+								class:list={['part-divider', part.accent && 'part-divider--accent']}
+								x1={vAxisX - divInset}
+								y1={divY}
+								x2={vAxisX + divInset}
+								y2={divY}
+							/>
+							<line
+								class:list={['annotation', 'leader', part.accent && 'leader--accent']}
+								x1={vAxisX + vThick / 2}
+								y1={0}
+								x2={vLeaderRightX}
+								y2={0}
+							/>
+							<text
+								class:list={['annotation', 'mono', 'part-num', part.accent && 'part-num--accent']}
+								x={vNumX}
+								y={-6}
+								text-anchor="start"
+							>
+								{part.num}
+							</text>
+							<text class="annotation mono part-label" x={vNumX} y={14} text-anchor="start">
+								{part.label}
+							</text>
+						</g>
+					</g>
+				</g>
+			);
+		})
+	}
+</svg>
+</div>
+
+<style>
+	.assembly-wrap {
+		container-type: inline-size;
+		container-name: assembly;
+	}
+
+	.assembly {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.assembly--v {
+		display: none;
+	}
+
+	@container assembly (max-width: 700px) {
+		.assembly--h {
+			display: none;
+		}
+		.assembly--v {
+			display: block;
+		}
+	}
+
+	.axis-half {
+		stroke: var(--steel-600);
+		stroke-width: var(--diagram-stroke);
+		stroke-dasharray: 2 3;
+		stroke-dashoffset: 100;
+		vector-effect: non-scaling-stroke;
+		fill: none;
+		animation: draw-axis var(--dur-assembly) var(--ease-out) both;
+	}
+
+	.part-body {
+		fill: var(--steel-800);
+		stroke: var(--steel-600);
+		stroke-width: var(--diagram-stroke);
+		vector-effect: non-scaling-stroke;
+	}
+
+	.part-body--accent {
+		stroke: var(--signal-500);
+	}
+
+	.part-divider {
+		stroke: var(--steel-600);
+		stroke-width: var(--diagram-stroke);
+		vector-effect: non-scaling-stroke;
+	}
+
+	.part-divider--accent {
+		stroke: var(--signal-500);
+	}
+
+	.leader {
+		stroke: var(--steel-600);
+		stroke-width: var(--diagram-stroke);
+		vector-effect: non-scaling-stroke;
+	}
+
+	.leader--accent {
+		stroke: var(--signal-500);
+	}
+
+	.part-num {
+		fill: var(--text-muted);
+	}
+
+	.part-num--accent {
+		fill: var(--signal-500);
+	}
+
+	.part-label {
+		fill: var(--text-muted);
+	}
+
+	.part-slide {
+		animation-duration: var(--dur-assembly);
+		animation-timing-function: var(--ease-out);
+		animation-fill-mode: both;
+		animation-delay: calc(var(--stagger) * var(--index));
+	}
+
+	.part-slide--x {
+		animation-name: slide-in-x;
+	}
+
+	.part-slide--y {
+		animation-name: slide-in-y;
+	}
+
+	.annotation {
+		animation: fade-in var(--dur-base) var(--ease-out) both;
+		animation-delay: calc(var(--stagger) * 4 + var(--dur-assembly));
+	}
+
+	@keyframes draw-axis {
+		from {
+			stroke-dashoffset: 100;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	@keyframes slide-in-x {
+		from {
+			transform: translateX(var(--slide-from));
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+
+	@keyframes slide-in-y {
+		from {
+			transform: translateY(var(--slide-from));
+		}
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.axis-half,
+		.part-slide,
+		.annotation {
+			animation-delay: 0ms;
+		}
+	}
+</style>

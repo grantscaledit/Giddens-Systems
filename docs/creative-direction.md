@@ -83,6 +83,11 @@ the whole system collapses. This is not a guideline.
 
 `signal-700` exists only for pressed/active states. It is never a fill color.
 
+Diagram linework (the exploded assembly, any future inline SVG) uses `--diagram-stroke`
+(1px), not `--rule-weight`. `--rule-weight` (0.5px) renders sub-pixel and inconsistent
+inside a scaled `viewBox` — it stays reserved for real hairline rules in the page's own
+box model.
+
 ### Never
 
 - `#000000` or `#FFFFFF` anywhere in the codebase
@@ -157,6 +162,14 @@ That is the whole budget. No scroll-triggered fade-ups. No stagger reveals on he
 No parallax. No counting-up numbers. No marquee. No cursor followers.
 
 `prefers-reduced-motion: reduce` disables both; the assembly renders in final state.
+
+**Interaction states are not motion.** Hover, focus, and active states on
+buttons and links are function, not animation, and do not count against the
+two-moment budget. They use `--dur-fast` and must be instant enough to feel
+mechanical rather than animated.
+
+`--signal-700` is the pressed/active fill of the primary button. That is its
+only use — it is never a resting fill.
 
 ---
 

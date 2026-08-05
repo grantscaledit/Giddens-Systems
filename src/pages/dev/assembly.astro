@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import ExplodedAssembly from '../../components/ExplodedAssembly.astro';
+
+// Permanent isolation harness for the hero's signature element, routable in
+// dev so it can actually be opened in a browser. Stripped from the
+// production build (see package.json's build script) — must not be
+// underscore-prefixed, or Astro excludes it from routing entirely and it
+// can't be previewed. Lets the assembly be checked on its own, at full
+// content width, without the rest of the hero around it.
+
+const title = 'Assembly preview — development page';
+const description = 'Internal isolation harness for ExplodedAssembly.';
+---
+
+<Base title={title} description={description} noindex>
+	<main>
+		<h1>exploded assembly</h1>
+		<p class="mono">
+			isolation harness. development page — stripped from production build. reload
+			to replay — plays once on load, same as it will in the hero.
+		</p>
+		<div class="stage">
+			<ExplodedAssembly />
+		</div>
+	</main>
+</Base>
+
+<style>
+	main {
+		max-width: var(--width-content);
+		margin: 0 auto;
+		padding: var(--space-xl);
+	}
+
+	.stage {
+		margin-top: var(--space-xl);
+	}
+</style>

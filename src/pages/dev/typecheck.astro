@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Permanent regression check, routable in dev so it can actually be opened
+// in a browser. Stripped from the production build (see package.json's
+// build script) — must not be underscore-prefixed, or Astro excludes it
+// from routing entirely and it can't be previewed. Confirms the self-hosted
+// variable fonts are actually loading with their intended axes rather than
+// silently falling back to a static weight or system-ui.
+
+const title = 'Typecheck — development page';
+const description = 'Internal font-loading regression check.';
+
+const widths = [62, 100, 118, 125];
+---
+
+<Base title={title} description={description} noindex>
+	<main>
+		<h1>type check</h1>
+		<p class="mono">
+			internal regression check. confirms the three self-hosted variable fonts load
+			with their intended axes rather than silently falling back. development page —
+			stripped from production build.
+		</p>
+
+		<hr />
+
+		<section>
+			<h2>display — archivo variable, wdth axis</h2>
+			<p class="mono">
+				same word, four widths. if all four look identical, the wdth axis isn't
+				loading and the site's signature typographic move is silently dead.
+			</p>
+			{
+				widths.map((w) => (
+					<div class="row">
+						<span class="mono label">wdth {w}</span>
+						<span class="wdth-sample" style={`font-variation-settings: 'wdth' ${w}`}>
+							Systems
+						</span>
+					</div>
+				))
+			}
+		</section>
+
+		<hr />
+
+		<section>
+			<h2>body — instrument sans variable</h2>
+			<p class="mono">actual face vs. explicit system-ui. these must look different.</p>
+			<div class="row">
+				<span class="mono label">actual</span>
+				<p class="body-sample">The quick brown fox jumps over the lazy dog.</p>
+			</div>
+			<div class="row">
+				<span class="mono label">system-ui</span>
+				<p class="body-sample fallback">The quick brown fox jumps over the lazy dog.</p>
+			</div>
+		</section>
+
+		<hr />
+
+		<section>
+			<h2>utility — jetbrains mono variable</h2>
+			<p class="mono">actual face vs. explicit ui-monospace. these must look different.</p>
+			<div class="row">
+				<span class="mono label">actual</span>
+				<p class="mono-sample">fig. 01 / rev 2026.08 — 0O1lI</p>
+			</div>
+			<div class="row">
+				<span class="mono label">ui-monospace</span>
+				<p class="mono-sample fallback">fig. 01 / rev 2026.08 — 0O1lI</p>
+			</div>
+		</section>
+	</main>
+</Base>
+
+<style>
+	main {
+		max-width: var(--width-content);
+		margin: 0 auto;
+		padding: var(--space-xl);
+	}
+
+	hr {
+		border: none;
+		border-top: var(--rule-weight) solid var(--rule);
+		margin: var(--space-lg) 0;
+	}
+
+	section h2 {
+		font-size: var(--size-h2);
+		margin-bottom: var(--space-sm);
+	}
+
+	section > p.mono {
+		margin-bottom: var(--space-md);
+	}
+
+	.row {
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-md);
+		padding: var(--space-xs) 0;
+		border-top: var(--rule-weight) solid var(--rule);
+	}
+
+	.label {
+		flex: 0 0 8ch;
+	}
+
+	.wdth-sample {
+		font-family: var(--font-display);
+		font-weight: var(--weight-display);
+		font-size: var(--size-display);
+		letter-spacing: var(--track-display);
+		color: var(--text-display);
+	}
+
+	.body-sample {
+		font-family: var(--font-body);
+		font-size: var(--size-h3);
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	.mono-sample {
+		font-family: var(--font-mono);
+		font-size: var(--size-body);
+		letter-spacing: var(--track-mono);
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	.fallback {
+		font-family: system-ui, sans-serif;
+	}
+
+	.mono-sample.fallback {
+		font-family: ui-monospace, monospace;
+	}
+</style>

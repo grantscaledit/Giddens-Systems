@@ -95,6 +95,7 @@ direction. If you catch yourself writing one, stop and re-read the direction doc
 - Explicit `width`/`height` on every image (no layout shift)
 - Semantic HTML. `<button>` for actions, `<a>` for navigation, real `<h1>`-`<h3>` order
 - Text contrast ≥ 4.5:1. `--steel-400` on `--steel-900` is the tightest pair — verify it
+- All copy comes from docs/copy.md. Never invent or draft copy."
 
 ---
 
