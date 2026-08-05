@@ -1,0 +1,85 @@
+---
+// Primary (filled) and secondary (outlined). Renders <a> when href is set,
+// <button> otherwise — real semantics, per the anchor-for-navigation rule.
+//
+// Primary's rest fill is --signal-500 and its pressed fill is --signal-700
+// (the one place that token is ever a fill, per the direction doc). Text
+// color flips between rest and pressed rather than staying static: checked
+// against the actual token hexes, steel-950 on signal-500 is 4.77:1 but
+// chalk-050 on signal-500 is 3.58:1 (fails 4.5:1); inverted on signal-700,
+// chalk-050 is 5.50:1 but steel-950 is 3.10:1. No single static color clears
+// the contrast floor in both states.
+interface Props {
+	variant?: 'primary' | 'secondary';
+	href?: string;
+	type?: 'button' | 'submit';
+}
+
+const { variant = 'primary', href, type = 'button' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+	class={`btn btn--${variant}`}
+	href={href}
+	type={href ? undefined : type}
+>
+	<slot />
+</Tag>
+
+<style>
+	.btn {
+		display: inline-block;
+		padding: var(--space-sm) var(--space-lg);
+		border-radius: var(--radius);
+		font-family: var(--font-body);
+		font-size: var(--size-body);
+		font-weight: var(--weight-medium);
+		line-height: 1;
+		text-decoration: none;
+		cursor: pointer;
+		transition: background-color var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+	}
+
+	.btn--primary {
+		background: var(--signal-500);
+		color: var(--steel-950);
+		border: var(--border-emphasis) solid var(--signal-500);
+	}
+
+	.btn--primary:hover {
+		text-decoration: underline;
+	}
+
+	.btn--primary:active {
+		background: var(--signal-700);
+		border-color: var(--signal-700);
+		color: var(--chalk-050);
+	}
+
+	/* The sitewide focus ring is signal-500, same as this button's own fill —
+	   without a hard edge first, the ring reads as a shadow, not a focus
+	   indicator. The border (already 1px, invisible at rest since it matches
+	   the fill) switches to steel-950 on focus, so the ring sequence becomes
+	   fill -> dark edge -> gap -> signal-500 ring, keeping the ring itself on
+	   the sitewide token. */
+	.btn--primary:focus-visible {
+		border-color: var(--steel-950);
+	}
+
+	.btn--secondary {
+		background: transparent;
+		color: var(--text-display);
+		border: var(--border-emphasis) solid var(--steel-600);
+	}
+
+	.btn--secondary:hover {
+		background: var(--bg-raised);
+		border-color: var(--steel-400);
+	}
+
+	.btn--secondary:active {
+		background: var(--bg-section);
+		border-color: var(--chalk-050);
+	}
+</style>

@@ -1,0 +1,89 @@
+---
+import ExplodedAssembly from './ExplodedAssembly.astro';
+import Eyebrow from './Eyebrow.astro';
+import Rule from './Rule.astro';
+import DisplayHeading from './DisplayHeading.astro';
+import Button from './Button.astro';
+---
+
+<section class="hero">
+	<div class="content">
+		<div class="hero-eyebrow-row">
+			<Eyebrow label="giddens.systems" stamp="fig. 01 / rev 2026.08" />
+		</div>
+		<div class="hero-rule-row">
+			<Rule />
+		</div>
+
+		<DisplayHeading as="h1" maxWidth="560px" class="hero-headline">
+			Every missed call is a five thousand dollar job.
+		</DisplayHeading>
+
+		<p class="hero-subhead">
+			We build one system that catches them — a site that gets found, a CRM that
+			holds the pipeline, and intake that answers when you can't. Usually live in
+			under three weeks.
+		</p>
+
+		<div class="hero-assembly">
+			<ExplodedAssembly />
+		</div>
+
+		<div class="hero-cta">
+			<Button href="#book" variant="primary">Book a systems audit</Button>
+			<p class="mono hero-qualifier">no charge / 30 min / mckinney tx</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		padding-block: var(--space-4xl);
+	}
+
+	.hero-eyebrow-row {
+		grid-column: 1 / 13;
+	}
+
+	.hero-rule-row {
+		grid-column: 1 / 13;
+		margin-block: var(--space-lg);
+	}
+
+	.hero :global(.hero-headline) {
+		grid-column: 1 / 8;
+		margin-block-end: var(--space-md);
+	}
+
+	.hero-subhead {
+		grid-column: 1 / 8;
+		max-width: 430px;
+		margin-block-end: var(--space-xl);
+	}
+
+	.hero-assembly {
+		grid-column: 1 / 13;
+		margin-block-end: var(--space-xl);
+	}
+
+	.hero-cta {
+		grid-column: 1 / 8;
+		display: flex;
+		align-items: center;
+		gap: var(--space-md);
+	}
+
+	@media (max-width: 700px) {
+		.hero :global(.hero-headline),
+		.hero-subhead,
+		.hero-cta {
+			grid-column: 1 / 13;
+		}
+
+		.hero-cta {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: var(--space-sm);
+		}
+	}
+</style>

@@ -29,6 +29,17 @@
   --accent: var(--signal-500);
   --accent-pressed: var(--signal-700);
 
+  /* ---- Grain -------------------------------------------------------------
+     Ambient texture only, per creative-direction.md's material band section:
+     5-7% opacity, disabled under reduced motion (it's static, so nothing to
+     disable, but the surface it dresses may sit near motion elsewhere).
+     Rendered as fractal noise, not a geometric repeat — any exact tiled
+     pattern beats against fractional zoom/DPI at some scale factor, so
+     there's no grain-size token here to tune; the noise has no repeat
+     period at the pixel scale for the pixel grid to interfere with. */
+
+  --grain-opacity: 0.045;
+
   /* ---- Type ------------------------------------------------------------- */
   /* Three faces, three jobs. Self-hosted via @fontsource — no CDN request. */
 
@@ -82,6 +93,7 @@
   --width-content: 1200px;
 
   --gutter: clamp(1.25rem, 4vw, 3rem);   /* horizontal page padding */
+  --grid-gap: clamp(1rem, 2vw, 1.5rem);  /* column gap in .content grid */
 
   /* ---- Form ------------------------------------------------------------- */
   /* Near-zero radius. Rounded cards are the most recognizable AI tell there is. */

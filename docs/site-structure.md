@@ -160,7 +160,107 @@ before the next begins.
 8. Pricing.
 9. Material band.
 10. Final CTA.
-11. Full review at 1440 / 768 / 375. Lighthouse. Keyboard pass. Reduced-motion pass.
+## Step 11 — Launch review
+
+Run once, after every section is built and individually reviewed. This pass exists
+to catch what per-section review structurally **cannot**: violations that only
+appear when sections sit next to each other, and behavior that only appears in a
+production build.
+
+Nothing ships until every blocker here clears.
+
+### A · Viewport-level constraints
+
+Per-section review checked sections in isolation. These are cross-section.
+
+- [ ] **Accent budget, scrolled.** Scroll the full page slowly at 1440px, pausing
+      every half viewport. Count `--signal-500` appearances *on screen* at each
+      stop. Max two. A viewport spanning two sections can carry one accent from
+      each and pass both section reviews while failing here. Repeat at 375px,
+      where sections stack and pairings differ.
+- [ ] **Section padding variety.** Confirm all three of `--space-2xl / 3xl / 4xl`
+      are actually in use and assigned by weight. Uniform rhythm is a tell.
+- [ ] **Heading order.** Exactly one `<h1>`. No skipped levels top to bottom.
+- [ ] **Centered elements.** Exactly one — the final CTA. Everything else asymmetric.
+- [ ] **Rules.** Every hairline separates something. Delete any that separate nothing.
+
+### B · Responsive
+
+Test at 375, 768, 1024, 1440, and 1920.
+
+- [ ] No horizontal scroll at any width
+- [ ] No clipped or overlapping text
+- [ ] Tap targets ≥ 44px at 375px
+- [ ] ExplodedAssembly flips composition at its 700px container breakpoint, in the
+      real hero column — not just on `/dev/assembly`
+- [ ] Assembly annotation text measures ≥ 11px at 375px (`getBoundingClientRect()`)
+- [ ] Screenshot frames never exceed 60% of section width
+- [ ] Pricing tiers stack in the correct order below 700px
+
+### C · Accessibility
+
+- [ ] Tab the entire page. Every interactive element has a **visible** focus ring
+      against its actual background — verify the primary button specifically
+- [ ] Skip link is first in tab order and appears on focus
+- [ ] Focus order matches visual order
+- [ ] `prefers-reduced-motion` verified at OS level, not by code reading or media
+      query emulation. Windows Settings → Accessibility → Visual effects →
+      Animation effects off. Assembly must render settled; no motion anywhere
+- [ ] Contrast measured, not estimated. `--steel-400` on `--steel-900` is the
+      tightest pair. Minimum 4.5:1
+- [ ] Every content image has meaningful `alt`; decorative images `alt=""`
+- [ ] Assembly SVG has `role="img"`, `<title>`, `<desc>`
+- [ ] Page is usable at 200% browser zoom
+
+### D · Performance
+
+Run against `npm run build && npm run preview`, never the dev server.
+
+- [ ] Lighthouse 100 on performance, mobile and desktop
+- [ ] Zero unnecessary `client:*` directives — each surviving one justified in writing
+- [ ] Material band under 800KB. Poster frame present. `preload="none"`
+- [ ] **Grain scroll paint.** DevTools → Performance → record a scroll over a
+      `.grain-surface` section. Check for layout/paint spikes. `mix-blend-mode`
+      forces backdrop reads and can't cheaply promote to a GPU layer. If jank
+      appears: drop to `soft-light`, then remove the blend mode entirely and
+      tune `--grain-opacity`. Either fallback is visually near-identical
+- [ ] No layout shift. Fonts self-hosted, images have explicit dimensions
+- [ ] **Confirm zero third-party font requests** in the Network tab. If
+      `fonts.googleapis.com` appears, self-hosting isn't working
+- [ ] Archivo width axis renders correctly in the **production build**, not just dev
+
+### E · Content and copy
+
+- [ ] `npm run check:copy` passes — no `[[PH:` markers anywhere in `src/`
+- [ ] Every number on the page is verifiable by a phone call to a client
+- [ ] Both case study clients have seen and approved their section
+- [ ] No banned words. No exclamation points. Sentence case throughout
+- [ ] Offer is described as one system, never as a menu of services
+- [ ] All copy matches `docs/copy.md` verbatim
+
+### F · Build hygiene
+
+- [ ] `dist/dev` is absent from the production build — verify, don't assume
+- [ ] `[data-ph]` outline rule absent from production CSS
+- [ ] Real `<title>` and meta description
+- [ ] OG image present and rendering correctly in a link preview
+- [ ] Favicon renders at 16px and is legible
+- [ ] No console errors or warnings
+
+### G · Cross-browser
+
+- [ ] Chrome, Firefox, Safari — desktop
+- [ ] Safari iOS, Chrome Android — real devices, not emulation
+- [ ] Safari specifically: container queries on the assembly, `mix-blend-mode`
+      on grain, and variable font axis support
+
+### H · The final question
+
+Screenshot the full page. Look at it cold, as if you'd never seen it.
+
+**Would this pass as the work of a professional web designer, or does it read as
+generated?** If any section reads as generated, name which and why, and fix it
+before launch. This is the question the entire project exists to answer.
 
 ---
 

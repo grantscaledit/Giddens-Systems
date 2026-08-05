@@ -1,0 +1,20 @@
+---
+// Tag selection only — font-display, the wdth axis, weight, color, and
+// tracking for h1/h2/h3 are already global in tokens.css. maxWidth exists
+// because different headings on the page cap at different widths (the hero
+// headline at 560px; others won't).
+interface Props {
+	as: 'h1' | 'h2' | 'h3';
+	maxWidth?: string;
+	class?: string;
+}
+
+const { as: Tag, maxWidth, class: className } = Astro.props;
+---
+
+<Tag
+	class:list={['display-heading', className]}
+	style={maxWidth ? `max-width: ${maxWidth}` : undefined}
+>
+	<slot />
+</Tag>

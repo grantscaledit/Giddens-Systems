@@ -1,0 +1,22 @@
+---
+interface Props {
+	label: string;
+	stamp?: string;
+}
+
+const { label, stamp } = Astro.props;
+---
+
+<div class="eyebrow">
+	<span class="mono">{label}</span>
+	{stamp && <span class="mono">{stamp}</span>}
+</div>
+
+<style>
+	.eyebrow {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: var(--space-md);
+	}
+</style>

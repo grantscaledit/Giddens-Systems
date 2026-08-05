@@ -1,0 +1,16 @@
+---
+// Hairline. Reads as contained or full-bleed purely by where the parent
+// places it: inside `.content` for contained, as a direct child of a
+// full-width <section> for full-bleed. No prop, no breakout margin math.
+---
+
+<hr class="rule" />
+
+<style>
+	.rule {
+		width: 100%;
+		margin: 0;
+		border: none;
+		border-top: var(--rule-weight) solid var(--rule);
+	}
+</style>
