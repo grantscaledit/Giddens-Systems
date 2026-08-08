@@ -3,6 +3,8 @@ import '@fontsource-variable/archivo/standard.css';
 import '@fontsource-variable/instrument-sans';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/tokens.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -12,7 +14,7 @@ interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 
-// Dev-only outline marking [[PH: ]] placeholder copy so it's visible while
+// Dev-only outline marking PH-bracket placeholder copy so it's visible while
 // building. Uses set:html to bypass Astro's static CSS extraction, so this
 // never ends up in a production stylesheet.
 const devPlaceholderStyles = import.meta.env.DEV
@@ -33,7 +35,12 @@ const devPlaceholderStyles = import.meta.env.DEV
 		{devPlaceholderStyles && <style set:html={devPlaceholderStyles} />}
 	</head>
 	<body>
-		<slot />
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+		<Nav />
+		<main id="main-content">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
 
@@ -80,5 +87,25 @@ const devPlaceholderStyles = import.meta.env.DEV
 	.grain-surface > .content {
 		position: relative;
 		z-index: 1;
+	}
+
+	.skip-link {
+		position: absolute;
+		top: 0;
+		left: var(--space-sm);
+		transform: translateY(-100%);
+		z-index: 100;
+		background: var(--bg-raised);
+		color: var(--text-display);
+		font-family: var(--font-mono);
+		font-size: var(--size-mono);
+		letter-spacing: var(--track-mono);
+		padding: var(--space-xs) var(--space-md);
+		text-decoration: none;
+		transition: transform var(--dur-fast);
+	}
+
+	.skip-link:focus-visible {
+		transform: translateY(0);
 	}
 </style>

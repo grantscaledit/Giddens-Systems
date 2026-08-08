@@ -1,0 +1,83 @@
+---
+// Tier block. Hairline border on all four sides, zero radius, no shadow, no
+// fill. The card shell only — tagline and feature list are composed by the
+// caller via the default slot, so this stays a pure shell.
+//
+// `name` is the h3 — the tier name is the heading, not the price (a price
+// read aloud as a heading breaks heading order for a screen reader). It gets
+// a monospace skin ("tier names in JetBrains Mono") layered on top of the
+// h3's own semantics, not a mono class swapped in for the tag.
+//
+// `price` is styled text, not a heading: Archivo, the wdth axis, and
+// --size-h2 pulled directly as CSS values (not via the h2/h3 element rule),
+// so it reads at the same scale the spec asks for without claiming a heading
+// slot that belongs to the tier name.
+//
+// `recommended` marks Growth: --bg-raised surface plus a single 1px
+// --signal-500 top border. --border-emphasis, not --rule-weight — a
+// half-pixel accent line is invisible on a dark surface, and this is one of
+// the section's two orange appearances, so it has to actually be seen.
+interface Props {
+	name: string;
+	price?: string;
+	recommended?: boolean;
+}
+
+const { name, price, recommended = false } = Astro.props;
+---
+
+<div class={`price-tier ${recommended ? 'price-tier--recommended' : ''}`}>
+	<h3 class="price-tier-name">{name}</h3>
+	{price && <p class="price-tier-price">{price}</p>}
+	<div class="price-tier-body">
+		<slot />
+	</div>
+</div>
+
+<style>
+	.price-tier {
+		border: var(--rule-weight) solid var(--rule);
+		border-radius: var(--radius-none);
+		padding: var(--space-lg) var(--space-md);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+		height: 100%;
+	}
+
+	.price-tier--recommended {
+		background: var(--bg-raised);
+		border-top: var(--border-emphasis) solid var(--signal-500);
+	}
+
+	.price-tier-name {
+		font-family: var(--font-mono);
+		font-size: var(--size-mono);
+		font-weight: var(--weight-medium);
+		letter-spacing: var(--track-mono);
+		color: var(--text-display);
+		margin: 0;
+	}
+
+	.price-tier-price {
+		font-family: var(--font-display);
+		font-variation-settings: 'wdth' var(--display-width);
+		font-weight: var(--weight-display);
+		font-size: var(--size-h2);
+		line-height: var(--leading-heading);
+		letter-spacing: var(--track-heading);
+		color: var(--text-display);
+		margin: 0;
+	}
+
+	.price-tier-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		margin-block-start: var(--space-xs);
+	}
+
+	.price-tier-body :global(p) {
+		max-width: none;
+	}
+</style>

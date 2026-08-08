@@ -1,0 +1,170 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Terms of Service — Giddens Systems';
+const description = 'The terms governing use of giddens.systems and services provided by Giddens Systems LLC.';
+---
+
+<Base title={title} description={description}>
+	<section class="legal">
+		<div class="content">
+			<article class="prose">
+				<h1>Terms of Service</h1>
+				<p><strong>Effective August 7, 2026</strong></p>
+
+				<p>
+					These Terms govern your use of giddens.systems and any services provided by
+					Giddens Systems LLC ("Giddens Systems," "we," "us"). By using this site or
+					engaging our services, you agree to them.
+				</p>
+
+				<h2>Services</h2>
+				<p>
+					Giddens Systems provides marketing and web services to businesses, including
+					website design and hosting, search engine optimization, CRM configuration,
+					automated call intake, appointment booking, and customer follow-up systems.
+				</p>
+				<p>
+					The specific scope, deliverables, and fees for any engagement are set out in
+					a separate written service agreement between us and the client. Where those
+					terms conflict with these, the service agreement controls.
+				</p>
+
+				<h2>Fees and payment</h2>
+				<ul>
+					<li>A one-time build fee is invoiced when a client engages us, and work begins on receipt</li>
+					<li>Monthly service fees are billed in advance on a recurring basis</li>
+					<li>Monthly services are month-to-month with no long-term commitment unless otherwise agreed in writing</li>
+					<li>Payments are processed by third-party processors; by paying, you also agree to their terms</li>
+					<li>Fees are exclusive of any applicable taxes</li>
+				</ul>
+
+				<h2>Cancellation and refunds</h2>
+				<ul>
+					<li>
+						Monthly services may be cancelled at any time with written notice.
+						Cancellation takes effect at the end of the current billing period, and the
+						current period is non-refundable.
+					</li>
+					<li>
+						<strong>Build fees are non-refundable once work has begun</strong>, as they
+						cover labor performed at the outset of an engagement.
+					</li>
+					<li>We may suspend or terminate services for non-payment after written notice.</li>
+				</ul>
+
+				<h2>Client responsibilities</h2>
+				<p>
+					You agree to provide accurate information, supply content and materials in a
+					timely manner, maintain the rights to any content you give us, and use our
+					services lawfully. Delays caused by outstanding client materials extend
+					delivery timelines accordingly.
+				</p>
+
+				<h2>Ownership</h2>
+				<p>
+					On full payment, you own your website content, your domain, and your customer
+					data. We retain ownership of our underlying tools, templates, frameworks, and
+					methods.
+				</p>
+				<p>You register and hold your own domain name. We do not hold client domains.</p>
+
+				<h2>Third-party services</h2>
+				<p>
+					Our services rely on third-party platforms including hosting, CRM, telephony,
+					and messaging providers. We are not responsible for their availability,
+					performance, or changes to their terms and pricing.
+				</p>
+
+				<h2>No guarantee of results</h2>
+				<p>
+					We do not guarantee specific results, including rankings, lead volume,
+					revenue, or conversion rates. Search engine and advertising platform behavior
+					is outside our control.
+				</p>
+
+				<h2>Limitation of liability</h2>
+				<p>
+					To the maximum extent permitted by law, our total liability arising from
+					these Terms or our services will not exceed the amount you paid us in the
+					three months preceding the claim. We are not liable for indirect, incidental,
+					or consequential damages, including lost profits or lost data.
+				</p>
+
+				<h2>Confidentiality</h2>
+				<p>
+					Each party will protect the other's confidential business information and use
+					it only as needed to perform under these Terms.
+				</p>
+
+				<h2>Governing law</h2>
+				<p>
+					These Terms are governed by the laws of the State of Texas, without regard to
+					conflict of law rules. Any dispute will be brought in the state or federal
+					courts located in Collin County, Texas.
+				</p>
+
+				<h2>Changes</h2>
+				<p>
+					We may update these Terms. Continued use of the site or our services after
+					changes are posted constitutes acceptance.
+				</p>
+
+				<h2>Contact</h2>
+				<address>
+					Giddens Systems LLC<br />
+					McKinney, Texas<br />
+					<a href="mailto:grant@giddens.systems">grant@giddens.systems</a>
+				</address>
+			</article>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.legal {
+		padding-block: var(--space-3xl);
+	}
+
+	.prose {
+		grid-column: 1 / 8;
+		max-width: var(--measure);
+	}
+
+	.prose h1 {
+		margin-block-end: var(--space-lg);
+	}
+
+	.prose h2 {
+		font-size: var(--size-h3);
+		margin-block: var(--space-xl) var(--space-sm);
+	}
+
+	.prose p {
+		margin-block-end: var(--space-md);
+		max-width: none;
+	}
+
+	.prose ul {
+		margin: 0 0 var(--space-md);
+		padding-inline-start: var(--space-lg);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.prose a {
+		color: var(--text-muted);
+	}
+
+	.prose address {
+		font-style: normal;
+		color: var(--text-body);
+	}
+
+	@media (max-width: 700px) {
+		.prose {
+			grid-column: 1 / 13;
+		}
+	}
+</style>

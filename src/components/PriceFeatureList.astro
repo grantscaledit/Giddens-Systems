@@ -1,0 +1,44 @@
+---
+// Feature list inside a tier. Instrument Sans (inherited body face — no
+// override needed, "feature lists in Instrument Sans" just means don't
+// touch it). An em dash marker, not an icon or checkmark — icons standing in
+// where proof should be is banned, and a plain dash keeps the register flat
+// and mechanical rather than decorative.
+interface Props {
+	items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="price-feature-list">
+	{items.map((item) => <li>{item}</li>)}
+</ul>
+
+<style>
+	.price-feature-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+		font-size: var(--size-small);
+	}
+
+	.price-feature-list li {
+		position: relative;
+		padding-inline-start: var(--space-md);
+	}
+
+	.price-feature-list li::before {
+		content: '—';
+		position: absolute;
+		left: 0;
+		/* --text-body, not --text-muted: the marker sits on --bg-raised inside
+		   the Growth tier, where steel-400 only clears 3.76:1 — below the 4.5:1
+		   floor. chalk-200 clears both that surface (8.9:1) and the page
+		   background the other two tiers sit on (12.3:1). */
+		color: var(--text-body);
+	}
+</style>

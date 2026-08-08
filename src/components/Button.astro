@@ -13,16 +13,18 @@ interface Props {
 	variant?: 'primary' | 'secondary';
 	href?: string;
 	type?: 'button' | 'submit';
+	disabled?: boolean;
 }
 
-const { variant = 'primary', href, type = 'button' } = Astro.props;
-const Tag = href ? 'a' : 'button';
+const { variant = 'primary', href, type = 'button', disabled = false } = Astro.props;
+const Tag = href && !disabled ? 'a' : 'button';
 ---
 
 <Tag
 	class={`btn btn--${variant}`}
-	href={href}
-	type={href ? undefined : type}
+	href={Tag === 'a' ? href : undefined}
+	type={Tag === 'button' ? type : undefined}
+	disabled={Tag === 'button' ? disabled : undefined}
 >
 	<slot />
 </Tag>
@@ -81,5 +83,24 @@ const Tag = href ? 'a' : 'button';
 	.btn--secondary:active {
 		background: var(--bg-section);
 		border-color: var(--chalk-050);
+	}
+
+	.btn:disabled {
+		cursor: not-allowed;
+	}
+
+	.btn--primary:disabled,
+	.btn--primary:disabled:active {
+		background: var(--steel-600);
+		border-color: var(--steel-600);
+		color: var(--text-muted);
+	}
+
+	.btn--secondary:disabled,
+	.btn--secondary:disabled:hover,
+	.btn--secondary:disabled:active {
+		background: transparent;
+		border-color: var(--steel-600);
+		color: var(--text-muted);
 	}
 </style>

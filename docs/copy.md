@@ -259,8 +259,8 @@ Build it once. Keep it running.
 
 **Section intro**
 Every plan includes the build: an SEO-structured website, your CRM and pipeline
-configured, and review requests running. The build is `[[PH: $1,997 ]]`, or
-`[[PH: $997 ]]` on a twelve-month agreement. Monthly is month-to-month after that.
+configured, and review requests running. The build is $1,997, or $997 on a
+twelve-month agreement. Monthly is month-to-month after that.
 
 ### Foundation — $297/mo
 
@@ -365,7 +365,7 @@ leads are dying. If we're not the right fit, you keep the map.
 **Submit:** Send it
 **Sending:** Sending…
 **Success:** Got it. We'll be in touch within one business day.
-**Failure:** That didn't go through. Call or text `[[PH: (214) 555-0142 ]]` and we'll sort it out.
+**Failure:** That didn't go through. Call or text `[[PH: (469-436-6333) ]]` and we'll sort it out.
 
 **Validation**
 - Name: Need a name to put on the calendar.
@@ -407,7 +407,7 @@ Body: Not your fault. Try again in a minute, or call us and we'll help directly.
 - [ ] 04 — screenshot captured and alt written
 - [ ] 05 — Marie: real name, city, story, result, metric
 - [ ] 05 — screenshot captured and alt written
-- [ ] 07 — build fee confirmed and final
+- [x] 07 — build fee confirmed and final
 - [ ] 09/10 — real email and phone
 - [ ] Forms — real failure-path phone number
 - [ ] `npm run check:copy` passes

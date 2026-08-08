@@ -1,0 +1,120 @@
+---
+// Contact, location, revision stamp. Hairline above, per site-structure.md
+// 10. Email and phone are still marked pending in copy.md — rendered per the
+// placeholder protocol in CLAUDE.md: brackets stripped, content wrapped in
+// [data-ph] so it stays visible in dev and is caught by check:copy if the
+// raw marker ever leaks back in.
+import Rule from './Rule.astro';
+---
+
+<footer class="footer">
+	<Rule />
+	<div class="content footer-inner">
+		<div class="footer-brand">
+			<p class="footer-wordmark">Giddens Systems</p>
+			<p class="footer-line">Websites, CRM, and AI call intake for service businesses. One system.</p>
+			<p class="footer-line">McKinney, Texas &middot; Serving DFW and North Texas</p>
+		</div>
+
+		<div class="footer-contact">
+			<p class="mono footer-contact-item"><span data-ph>grant@giddens.systems</span></p>
+			<p class="mono footer-contact-item"><span data-ph>(214) 555-0142</span></p>
+		</div>
+
+		<nav aria-label="Footer" class="footer-links">
+			<ul>
+				<li><a href="/#the-system" class="mono">the system</a></li>
+				<li><a href="/#work" class="mono">work</a></li>
+				<li><a href="/#pricing" class="mono">pricing</a></li>
+				<li><a href="/contact" class="mono">contact</a></li>
+				<li><a href="/privacy" class="mono">privacy</a></li>
+				<li><a href="/terms" class="mono">terms</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="content footer-meta">
+		<p class="mono">giddens.systems / rev 2026.08</p>
+		<p class="mono">&copy; 2026 Giddens Systems LLC</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		padding-block: var(--space-2xl);
+	}
+
+	.footer-inner {
+		row-gap: var(--space-xl);
+	}
+
+	.footer-brand {
+		grid-column: 1 / 7;
+	}
+
+	.footer-wordmark {
+		font-family: var(--font-display);
+		font-variation-settings: 'wdth' var(--display-width);
+		font-weight: var(--weight-display);
+		font-size: var(--size-h3);
+		color: var(--text-display);
+		margin: 0 0 var(--space-sm);
+	}
+
+	.footer-line {
+		color: var(--text-muted);
+		margin: 0;
+	}
+
+	.footer-contact {
+		grid-column: 7 / 10;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.footer-contact-item {
+		margin: 0;
+	}
+
+	.footer-links {
+		grid-column: 10 / 13;
+	}
+
+	.footer-links ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.footer-links a {
+		color: var(--text-muted);
+		text-decoration: none;
+	}
+
+	.footer-links a:hover {
+		color: var(--text-display);
+	}
+
+	.footer-meta {
+		margin-block-start: var(--space-xl);
+		display: flex;
+		justify-content: space-between;
+	}
+
+	@media (max-width: 700px) {
+		.footer-brand,
+		.footer-contact,
+		.footer-links {
+			grid-column: 1 / 13;
+		}
+
+		.footer-meta {
+			flex-direction: column;
+			gap: var(--space-2xs);
+		}
+	}
+</style>

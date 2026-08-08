@@ -1,0 +1,213 @@
+---
+// Section 07 · Pricing. Three tiers at 1/5, 5/9, 9/13 — not a fourth column
+// for "Bigger operation?", which would give an unpriced door the same visual
+// weight as a priced tier. It gets its own full-width block below instead.
+//
+// Accent budget for this whole section, in full: the Growth tier's 1px
+// --signal-500 top border (PriceTier's `recommended` prop), and the section
+// CTA button fill. Nothing else here touches --signal-500 — not the prices,
+// not the tier names, not "Most clients start here."
+import Eyebrow from './Eyebrow.astro';
+import Rule from './Rule.astro';
+import DisplayHeading from './DisplayHeading.astro';
+import Button from './Button.astro';
+import PriceTier from './PriceTier.astro';
+import PriceFeatureList from './PriceFeatureList.astro';
+---
+
+<section id="pricing" class="pricing">
+	<div class="content">
+		<div class="pricing-eyebrow-row">
+			<Eyebrow label="fig. 06 / pricing" />
+		</div>
+		<div class="pricing-rule-row">
+			<Rule />
+		</div>
+
+		<DisplayHeading as="h2" class="pricing-heading">
+			Build it once. Keep it running.
+		</DisplayHeading>
+
+		<p class="pricing-intro">
+			Every plan includes the build: an SEO-structured website, your CRM and pipeline
+			configured, and review requests running. The build is $1,997, or $997 on a
+			twelve-month agreement. Monthly is month-to-month after that.
+		</p>
+
+		<div class="pricing-tier pricing-tier--foundation">
+			<PriceTier name="Foundation" price="$297/mo">
+				<p>For a shop that needs to get found and stop losing leads in a text thread.</p>
+				<PriceFeatureList
+					items={[
+						'SEO-built website, hosted and maintained',
+						'CRM and pipeline, configured to your jobs',
+						'Automatic review requests',
+						'Web and form lead capture',
+						'Site edits, up to two requests a month',
+					]}
+				/>
+			</PriceTier>
+		</div>
+
+		<div class="pricing-tier pricing-tier--growth">
+			<PriceTier name="Growth" price="$497/mo" recommended>
+				<p>
+					For a shop that's missing calls it can't afford to miss.{' '}
+					<strong class="pricing-emphasis">Most clients start here.</strong>
+				</p>
+				<PriceFeatureList
+					items={[
+						'Everything in Foundation',
+						'AI call intake — answers, qualifies, books',
+						'Missed-call text-back',
+						'Full follow-up automation on quiet quotes and stale estimates',
+						'Call recording and monthly intake review',
+						'Pipeline reporting',
+					]}
+				/>
+			</PriceTier>
+		</div>
+
+		<div class="pricing-tier pricing-tier--full">
+			<PriceTier name="Full system" price="$797/mo">
+				<p>For a shop that wants to own its market, not just keep up with it.</p>
+				<PriceFeatureList
+					items={[
+						'Everything in Growth',
+						'Managed local SEO — Google Business Profile, citations, on-page',
+						'Service-area pages for every town you work in, expanded quarterly',
+						"Review response — we reply, you don't",
+						'Quarterly database reactivation campaigns against your existing list',
+						'Monthly report and a 30-minute strategy call',
+						'Priority support, same business day',
+					]}
+				/>
+			</PriceTier>
+		</div>
+
+		<div class="pricing-enterprise">
+			<h3 class="pricing-enterprise-name">Bigger operation?</h3>
+			<p>
+				Multiple locations, custom integrations, higher call volume, or something that
+				isn't on this list — that's a conversation, not a plan. Tell us what you're
+				running and we'll scope it.
+			</p>
+		</div>
+
+		<div class="pricing-cta">
+			<Button href="/contact" variant="primary">Book a systems audit</Button>
+		</div>
+
+		<p class="pricing-footnote">
+			Paid ads are handled separately and priced on their own. They need daily attention
+			and we'd rather quote that honestly than bury it in a plan.
+		</p>
+	</div>
+</section>
+
+<style>
+	.pricing {
+		padding-block: var(--space-3xl);
+	}
+
+	.pricing-eyebrow-row {
+		grid-column: 1 / 13;
+	}
+
+	.pricing-rule-row {
+		grid-column: 1 / 13;
+		margin-block: var(--space-lg);
+	}
+
+	.pricing :global(.pricing-heading) {
+		grid-column: 1 / 8;
+		margin-block-end: var(--space-md);
+	}
+
+	.pricing-intro {
+		grid-column: 1 / 8;
+		margin-block-end: var(--space-xl);
+	}
+
+	.pricing-tier {
+		/* CSS Grid's default align-items:stretch would force every card to the
+		   height of the tallest (Full system, 7 features), leaving Foundation
+		   with a dead gap below its 5th. align-self:start lets each card size
+		   to its own content instead — distinct card lengths for distinct
+		   content, the same principle ExplodedAssembly's parts already use. */
+		align-self: start;
+		margin-block-end: var(--space-lg);
+	}
+
+	.pricing-tier--foundation {
+		grid-column: 1 / 5;
+	}
+
+	.pricing-tier--growth {
+		grid-column: 5 / 9;
+	}
+
+	.pricing-tier--full {
+		grid-column: 9 / 13;
+	}
+
+	.pricing-enterprise {
+		grid-column: 1 / 13;
+		border: var(--rule-weight) solid var(--rule);
+		border-radius: var(--radius-none);
+		padding: var(--space-lg) var(--space-md);
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-lg);
+		margin-block-end: var(--space-xl);
+	}
+
+	.pricing-enterprise-name {
+		font-family: var(--font-mono);
+		font-size: var(--size-mono);
+		font-weight: var(--weight-medium);
+		letter-spacing: var(--track-mono);
+		color: var(--text-display);
+		margin: 0;
+		flex-shrink: 0;
+	}
+
+	.pricing-enterprise p {
+		color: var(--text-body);
+		max-width: none;
+	}
+
+	.pricing-emphasis {
+		color: var(--text-display);
+	}
+
+	.pricing-cta {
+		grid-column: 1 / 8;
+	}
+
+	.pricing-footnote {
+		grid-column: 1 / 8;
+		color: var(--text-muted);
+		font-size: var(--size-small);
+		margin-block-start: var(--space-md);
+	}
+
+	@media (max-width: 700px) {
+		.pricing :global(.pricing-heading),
+		.pricing-intro,
+		.pricing-tier--foundation,
+		.pricing-tier--growth,
+		.pricing-tier--full,
+		.pricing-enterprise,
+		.pricing-cta,
+		.pricing-footnote {
+			grid-column: 1 / 13;
+		}
+
+		.pricing-enterprise {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: var(--space-sm);
+		}
+	}
+</style>

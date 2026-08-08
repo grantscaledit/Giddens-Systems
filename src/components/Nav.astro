@@ -1,0 +1,81 @@
+---
+// Wordmark left, three monospace links + one outlined CTA right. The hero
+// already spends both --signal-500 appearances for the viewport, so this
+// CTA is secondary (outlined), never primary. No hamburger: below 700px the
+// links and CTA simply wrap onto their own row — no icon, no toggle, no JS.
+import Button from './Button.astro';
+---
+
+<header class="nav">
+	<div class="content nav-inner">
+		<a href="/" class="nav-wordmark">Giddens Systems</a>
+
+		<nav aria-label="Main navigation" class="nav-links-wrap">
+			<ul class="nav-links">
+				<li><a href="/#the-system" class="mono">the system</a></li>
+				<li><a href="/#work" class="mono">work</a></li>
+				<li><a href="/#pricing" class="mono">pricing</a></li>
+			</ul>
+			<Button href="/contact" variant="secondary">Book an audit</Button>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.nav {
+		border-bottom: var(--rule-weight) solid var(--rule);
+	}
+
+	.nav-inner {
+		padding-block: var(--space-md);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+	}
+
+	.nav-wordmark {
+		font-family: var(--font-display);
+		font-variation-settings: 'wdth' var(--display-width);
+		font-weight: var(--weight-display);
+		font-size: var(--size-h3);
+		color: var(--text-display);
+		text-decoration: none;
+		letter-spacing: var(--track-heading);
+	}
+
+	.nav-links-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-lg);
+	}
+
+	.nav-links {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-lg);
+		margin: 0;
+		padding: 0;
+	}
+
+	.nav-links a {
+		color: var(--text-muted);
+		text-decoration: none;
+		padding-block: var(--space-2xs);
+	}
+
+	.nav-links a:hover {
+		color: var(--text-display);
+	}
+
+	@media (max-width: 700px) {
+		.nav-links-wrap {
+			width: 100%;
+			justify-content: space-between;
+		}
+	}
+</style>

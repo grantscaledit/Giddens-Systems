@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "check:copy": "! grep -rn '\\[\\[PH:' src/ --include='*.astro' || (echo '\\nPLACEHOLDER COPY FOUND — cannot ship\\n' && exit 1)",
-    "build": "npm run check:copy && astro build && rm -rf dist/dev",
+    "check:copy": "node scripts/check-copy.mjs",
+    "build": "npm run check:copy && astro build && node -e \"require('node:fs').rmSync('dist/dev', { recursive: true, force: true })\"",
     "preview": "astro preview",
     "astro": "astro"
   },

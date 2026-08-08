@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Book a systems audit — Giddens Systems';
+const description =
+	"Thirty minutes, no charge. We'll map where your leads are dying and send you a " +
+	'calendar link within one business day.';
+---
+
+<Base title={title} description={description}>
+	<section class="contact">
+		<div class="content">
+			<h1 class="contact-heading">Book a systems audit</h1>
+			<p class="contact-sub">
+				Thirty minutes, no charge. We'll map where your leads are dying and send you a
+				calendar link within one business day.
+			</p>
+
+			<div class="contact-embed">
+				<iframe
+					src="https://api.leadconnectorhq.com/widget/form/YSt4r4Vs4Rsyg2no1WiX"
+					style="width:100%;min-height:1000px;border:0;display:block;border-radius:0px"
+					id="inline-YSt4r4Vs4Rsyg2no1WiX"
+					data-layout="{'id':'INLINE'}"
+					data-trigger-type="alwaysShow"
+					data-trigger-value=""
+					data-activation-type="alwaysActivated"
+					data-activation-value=""
+					data-deactivation-type="neverDeactivate"
+					data-deactivation-value=""
+					data-form-name="3.0 Contact Form"
+					data-height="1207"
+					data-layout-iframe-id="inline-YSt4r4Vs4Rsyg2no1WiX"
+					data-form-id="YSt4r4Vs4Rsyg2no1WiX"
+					title="3.0 Contact Form"></iframe>
+			</div>
+
+			<p class="contact-legal">
+				By submitting this form you agree to our <a href="/terms">Terms of Service</a> and
+				<a href="/privacy">Privacy Policy</a>. Consent to receive text messages is not a
+				condition of purchase.
+			</p>
+		</div>
+	</section>
+
+	<script src="https://link.msgsndr.com/js/form_embed.js" is:inline></script>
+</Base>
+
+<style>
+	.contact {
+		padding-block: var(--space-3xl);
+	}
+
+	.contact-heading {
+		grid-column: 1 / 8;
+		font-size: var(--size-display);
+		margin-block-end: var(--space-md);
+	}
+
+	.contact-sub {
+		grid-column: 1 / 8;
+		color: var(--text-muted);
+		margin-block-end: var(--space-xl);
+	}
+
+	.contact-embed {
+		grid-column: 1 / 9;
+		margin-block-end: var(--space-lg);
+	}
+
+	.contact-legal {
+		grid-column: 1 / 9;
+		color: var(--text-muted);
+		font-size: var(--size-small);
+	}
+
+	.contact-legal a {
+		color: var(--text-muted);
+	}
+
+	@media (max-width: 700px) {
+		.contact-heading,
+		.contact-sub,
+		.contact-embed,
+		.contact-legal {
+			grid-column: 1 / 13;
+		}
+	}
+</style>
