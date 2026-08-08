@@ -40,6 +40,22 @@ Use this exact wording everywhere — Stripe, A2P, the site, the LLC description
 
 **Fields:** Name · Business name · Phone · Email · What kind of work do you do? · Where do leads come in right now?
 
+### "Before you submit" consent block — above the form embed
+
+Lives in the page's own HTML, not inside the form iframe, so compliance scanners can read it.
+
+**Heading:** Before you submit
+
+> Giddens Systems will only text you if you check one of the consent boxes below. Checking them is optional — the form submits either way, and consent to receive text messages is never a condition of purchase.
+>
+> **Transactional messages** — updates about your inquiry, appointment confirmations and reminders, and service updates.
+>
+> **Promotional messages** — occasional offers and news about our services, only if you check the second box.
+>
+> Message frequency varies. Message and data rates may apply. Reply STOP at any time to opt out, or HELP for help. You must be 18 or older to consent. Carriers are not liable for delayed or undelivered messages.
+>
+> See our [Privacy Policy](/privacy) and [Terms of Service](/terms).
+
 ### SMS consent checkbox — exact required wording
 
 Must be **unchecked by default** and **optional** — the form has to submit without it. Checked-by-default is an automatic A2P rejection.
@@ -97,6 +113,14 @@ We do not sell your personal information. We share it only with:
 - **Service providers** who help us operate — hosting, CRM, email, and messaging platforms — who may only use it to provide services to us
 - **Legal authorities**, where required by law or to protect our rights
 
+## Data security
+
+We take reasonable and appropriate measures to protect your personal information from unauthorized access, disclosure, alteration, and destruction. These include encryption of data in transit using industry-standard TLS, access controls limiting who within our organization can view your information, and vetting the third-party service providers who process data on our behalf.
+
+No method of transmission or storage is completely secure, so we cannot guarantee absolute security. If we become aware of a data breach affecting your personal information, we will notify you and any relevant authorities as required by applicable law.
+
+You can request deletion of your information at any time by emailing grant@giddens.systems.
+
 ## Data retention
 
 We keep your information for as long as needed to provide services and meet legal obligations. You may request deletion at any time by emailing grant@giddens.systems.
@@ -140,6 +164,29 @@ These Terms govern your use of giddens.systems and any services provided by Gidd
 Giddens Systems provides marketing and web services to businesses, including website design and hosting, search engine optimization, CRM configuration, automated call intake, appointment booking, and customer follow-up systems.
 
 The specific scope, deliverables, and fees for any engagement are set out in a separate written service agreement between us and the client. Where those terms conflict with these, the service agreement controls.
+
+## SMS messaging program
+
+**Program description.** Giddens Systems operates an SMS messaging program for customers and prospective customers who have given express written consent. We send two categories of message:
+
+- **Transactional and informational** — appointment confirmations and reminders, follow-ups on quotes and proposals, project updates, and responses to inquiries
+- **Promotional** — occasional offers and announcements about our services, sent only to contacts who separately consented to marketing messages
+
+**How to join.** You opt in by submitting the contact form at giddens.systems/contact and checking one or both of the optional consent checkboxes. Consent is not a condition of purchase, and the form can be submitted without consenting.
+
+**Message frequency.** Message frequency varies based on your activity and inquiries. Most contacts receive fewer than ten messages per month.
+
+**Cost.** Message and data rates may apply. Giddens Systems does not charge for text messages; your mobile carrier's standard rates apply.
+
+**How to opt out.** Reply **STOP** to any message to stop receiving texts from us. You will receive one confirmation message and no further messages. You may rejoin at any time by opting in again through our contact form.
+
+**How to get help.** Reply **HELP** to any message for assistance, or contact us at grant@giddens.systems.
+
+**Supported carriers.** Our program is supported by major U.S. wireless carriers including AT&T, Verizon Wireless, T-Mobile, and Sprint. Carriers are not liable for delayed or undelivered messages.
+
+**Age requirement.** You must be at least 18 years old to consent to receive text messages from Giddens Systems. We do not knowingly send messages to anyone under 18.
+
+**Privacy.** No mobile information will be sold, rented, or shared with third parties or affiliates for marketing or promotional purposes. See our Privacy Policy for full details.
 
 ## Fees and payment
 

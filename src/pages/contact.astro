@@ -16,6 +16,31 @@ const description =
 				calendar link within one business day.
 			</p>
 
+			<div class="contact-consent">
+				<h2 class="contact-consent-heading">Before you submit</h2>
+				<p>
+					Giddens Systems will only text you if you check one of the consent boxes below.
+					Checking them is optional — the form submits either way, and consent to receive
+					text messages is never a condition of purchase.
+				</p>
+				<p class="msg-type">
+					<strong>Transactional messages</strong> — updates about your inquiry, appointment
+					confirmations and reminders, and service updates.
+				</p>
+				<p class="msg-type">
+					<strong>Promotional messages</strong> — occasional offers and news about our
+					services, only if you check the second box.
+				</p>
+				<p>
+					Message frequency varies. Message and data rates may apply. Reply STOP at any
+					time to opt out, or HELP for help. You must be 18 or older to consent. Carriers
+					are not liable for delayed or undelivered messages.
+				</p>
+				<p>
+					See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>.
+				</p>
+			</div>
+
 			<div class="contact-embed">
 				<iframe
 					src="https://api.leadconnectorhq.com/widget/form/YSt4r4Vs4Rsyg2no1WiX"
@@ -36,9 +61,8 @@ const description =
 			</div>
 
 			<p class="contact-legal">
-				By submitting this form you agree to our <a href="/terms">Terms of Service</a> and
-				<a href="/privacy">Privacy Policy</a>. Consent to receive text messages is not a
-				condition of purchase.
+				By submitting this form you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
+				Consent to receive text messages is not a condition of purchase.
 			</p>
 		</div>
 	</section>
@@ -63,6 +87,43 @@ const description =
 		margin-block-end: var(--space-xl);
 	}
 
+	/* Disclosure, not pitch. The hairline marks it as a separate zone the way a
+	   rule does on a drawing — whitespace alone left it reading as one gray column
+	   continuous with the sub-copy above. */
+	.contact-consent {
+		grid-column: 1 / 9;
+		max-width: var(--measure);
+		color: var(--text-muted);
+		font-size: var(--size-small);
+		border-block-start: var(--rule-weight) solid var(--rule);
+		padding-block-start: var(--space-lg);
+		margin-block-end: var(--space-lg);
+	}
+
+	.contact-consent-heading {
+		font-size: var(--size-h3);
+		margin-block-end: var(--space-sm);
+	}
+
+	.contact-consent p + p {
+		margin-block-start: var(--space-md);
+	}
+
+	/* The two categories are a pair. Tighter to each other than to the prose
+	   around them, and the label lifts out of the muted body to read as a label. */
+	.contact-consent .msg-type + .msg-type {
+		margin-block-start: var(--space-2xs);
+	}
+
+	.contact-consent strong {
+		color: var(--text-body);
+		font-weight: var(--weight-medium);
+	}
+
+	.contact-consent a {
+		color: var(--text-muted);
+	}
+
 	.contact-embed {
 		grid-column: 1 / 9;
 		margin-block-end: var(--space-lg);
@@ -81,6 +142,7 @@ const description =
 	@media (max-width: 700px) {
 		.contact-heading,
 		.contact-sub,
+		.contact-consent,
 		.contact-embed,
 		.contact-legal {
 			grid-column: 1 / 13;
