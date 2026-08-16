@@ -1,0 +1,137 @@
+---
+// One numbered step. Serves both numbered lists on the page, because there are
+// two of them — section 02's offer steps and section 07's process steps — and
+// four numbered steps rendered the same way twice would make those sections
+// read as duplicates of each other. One component with two variants forces the
+// difference to be a decision rather than a drift.
+//
+// `stacked` (section 02): index in a left gutter, title above its description,
+// no rules. A tight list. Rules are section 04's device and stay there.
+//
+// `ledger` (section 07): index, title and description on one line in three
+// columns, hairline above each row. Titles align down the page, which is what
+// makes it read as a parts list rather than as prose. The title/description
+// split across columns is the real difference from `stacked` — a hairline
+// alone would not have been one.
+//
+// Both variants place index, title and description as three direct grid
+// children rather than nesting title and description in a wrapper, because
+// `ledger` needs them in separate columns and `stacked` needs them in the
+// same one. Placement does the work; the markup stays identical.
+//
+// The title is an h3 held down to --size-h3, not the h3 element's default
+// --size-h2. ServiceRow's part names keep that default, so the two sections
+// rank correctly against each other: the parts of the machine are bigger than
+// the steps of a process.
+//
+// Renders an <li>. The <ol> belongs to the caller.
+interface Props {
+	index: string;
+	title: string;
+	variant?: 'stacked' | 'ledger';
+}
+
+const { index, title, variant = 'stacked' } = Astro.props;
+---
+
+<li class:list={['step-row', `step-row--${variant}`]}>
+	<span class="mono step-row-index">{index}</span>
+	<h3 class="step-row-title">{title}</h3>
+	<p class="step-row-desc"><slot /></p>
+</li>
+
+<style>
+	.step-row-title {
+		font-size: var(--size-h3);
+		line-height: var(--leading-heading);
+		letter-spacing: var(--track-heading);
+		margin: 0;
+	}
+
+	.step-row-desc {
+		color: var(--text-body);
+		margin: 0;
+	}
+
+	/* ---- stacked: section 02 ------------------------------------------- */
+
+	.step-row--stacked {
+		display: grid;
+		grid-template-columns: var(--space-lg) 1fr;
+		column-gap: var(--space-md);
+		row-gap: var(--space-3xs);
+		align-items: baseline;
+	}
+
+	.step-row--stacked .step-row-index {
+		grid-area: 1 / 1;
+	}
+
+	.step-row--stacked .step-row-title {
+		grid-area: 1 / 2;
+	}
+
+	.step-row--stacked .step-row-desc {
+		grid-area: 2 / 2;
+	}
+
+	/* ---- ledger: section 07 -------------------------------------------- */
+
+	/* The row runs the page's own 12-column grid at full content width, and
+	   each part is pinned to named columns. An earlier version sized these
+	   tracks with `auto` and `1fr` instead, and the description column
+	   collapsed to about seven characters a line — `1fr` carries an automatic
+	   min-content floor and will surrender its width to whatever sits beside
+	   it. Explicit column spans cannot collapse, and they land on the same
+	   grid lines the rest of the page uses.
+
+	   --size-small on the description against --size-h3 on the title: side by
+	   side, --size-body would sit only 2px off the title and the two would
+	   read as the same thing in two columns. */
+	.step-row--ledger {
+		display: grid;
+		/* minmax(0, 1fr) for the same reason .content uses it — see Base.astro.
+		   The explicit spans below already prevented the collapse this note
+		   describes; the floor is removed here too so the twelve tracks stay
+		   equal to the page grid's at every width. */
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		column-gap: var(--grid-gap);
+		align-items: baseline;
+		border-top: var(--rule-weight) solid var(--rule);
+		padding-block: var(--space-md) var(--space-lg);
+	}
+
+	.step-row--ledger .step-row-index {
+		grid-column: 1 / 2;
+	}
+
+	.step-row--ledger .step-row-title {
+		grid-column: 2 / 5;
+	}
+
+	.step-row--ledger .step-row-desc {
+		grid-column: 5 / 12;
+		min-width: 0;
+		font-size: var(--size-small);
+		max-width: none;
+	}
+
+	@media (max-width: 700px) {
+		.step-row--ledger {
+			grid-template-columns: var(--space-lg) 1fr;
+			row-gap: var(--space-3xs);
+		}
+
+		.step-row--ledger .step-row-index {
+			grid-area: 1 / 1;
+		}
+
+		.step-row--ledger .step-row-title {
+			grid-area: 1 / 2;
+		}
+
+		.step-row--ledger .step-row-desc {
+			grid-area: 2 / 2;
+		}
+	}
+</style>

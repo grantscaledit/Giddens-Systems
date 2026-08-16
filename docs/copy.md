@@ -99,9 +99,8 @@ intake, as one system. McKinney, Texas.
 Every missed call is a five thousand dollar job.
 
 **Subhead**
-We build one system that catches them — a site that gets found, a CRM that holds
-the pipeline, and intake that answers when you can't. Usually live in under three
-weeks.
+We book jobs from customers you already have, before you pay us to build anything.
+What that brings in pays for the system we build next.
 
 **CTA:** Book a systems audit
 **Qualifier:** no charge / 30 min / mckinney tx
@@ -111,7 +110,48 @@ weeks.
 
 ---
 
-## 02 · Proof band
+## 02 · We go first
+
+**Section eyebrow:** fig. 02 / the offer
+
+**Section headline**
+We go first.
+
+**Body**
+Most shops ask for two thousand dollars up front and hand you a website. We don't.
+
+Before we build anything, we run one campaign against the customers you already
+have — past jobs, old quotes, anyone who ever called. Booked jobs land on your
+calendar in the first two weeks. What that brings in pays for the system we build
+next.
+
+**The four steps** — monospace index, title, one line each
+
+**01 — You hand us the list**
+Past customers, old quotes, anyone who ever called for a price. However it's stored.
+
+**02 — We build the campaign**
+Loaded into a CRM we configure for you, cleaned, and written in your voice — not ours.
+
+**03 — We run it**
+Booked jobs on your calendar in the first two weeks. Not leads in an inbox.
+
+**04 — It pays for the build**
+Whatever the campaign produces covers the system we build next.
+
+**The guarantee** — set apart, this is the closing line of the section
+If that first campaign doesn't book at least $2,000 in work within 30 days, you
+don't pay for the build. We finish it anyway.
+
+**Qualifier, monospace, below the guarantee**
+requires 150+ past customers · list delivered within 3 business days · leads
+answered within 24 hours
+
+---
+
+## 03 · Proof band
+
+**Section eyebrow:** fig. 03 / proof
 
 | Value | Label |
 |---|---|
@@ -124,9 +164,9 @@ call. If you can only verify two, ship two. Do not round up.
 
 ---
 
-## 03 · The system
+## 04 · The system
 
-**Section eyebrow:** fig. 02 / the system
+**Section eyebrow:** fig. 04 / the system
 
 **Section headline**
 Three parts. One machine.
@@ -135,6 +175,8 @@ Three parts. One machine.
 Most shops sell you a website, or a CRM, or an answering service, and leave you to
 connect them. Nothing connects. The lead comes in one door and dies in another.
 We build the whole thing as one system, wired together, or we don't build it.
+We don't start by selling you a website. We start with the customers you already
+have.
 
 ### 01 — The front door
 
@@ -162,9 +204,9 @@ Answers every call, including the one at 9pm on a Sunday.
 
 ---
 
-## 04 · Case study — Donovan
+## 05 · Case study — Donovan
 
-**Eyebrow:** fig. 03 / case study
+**Eyebrow:** fig. 05 / case study
 **Client:** `[[PH: Donovan Epoxy Works ]]` — epoxy flooring, `[[PH: Frisco TX ]]`
 
 **Headline**
@@ -195,9 +237,9 @@ He stopped returning calls at night. ]]`
 
 ---
 
-## 05 · Case study — Marie
+## 06 · Case study — Marie
 
-**Eyebrow:** fig. 04 / case study
+**Eyebrow:** fig. 06 / case study
 **Client:** `[[PH: Marie's Crafty Cakery ]]` — custom cakes, `[[PH: McKinney TX ]]`
 
 **Headline**
@@ -225,9 +267,9 @@ She hasn't double-booked a Saturday since. ]]`
 
 ---
 
-## 06 · How it works
+## 07 · How it works
 
-**Section eyebrow:** fig. 05 / process
+**Section eyebrow:** fig. 07 / process
 
 **Section headline**
 Four steps. Three weeks, usually.
@@ -250,48 +292,63 @@ Nothing here is hostage.
 
 ---
 
-## 07 · Pricing
+## 08 · Pricing
 
-**Section eyebrow:** fig. 06 / pricing
+**Section eyebrow:** fig. 08 / pricing
 
 **Section headline**
 Build it once. Keep it running.
 
 **Section intro**
-Every plan includes the build: an SEO-structured website, your CRM and pipeline
-configured, and review requests running. The build is $1,997, or $997 on a
-twelve-month agreement. Monthly is month-to-month after that.
+Every plan starts with the build: your website, your CRM, and your automations
+configured around your actual jobs. The build is $1,997 — and it's the part we
+put at risk. If the first reactivation campaign doesn't book at least $2,000 in
+work within 30 days, you don't pay for it. Monthly is month-to-month after that.
 
 ### Foundation — $297/mo
 
-For a shop that needs to get found and stop losing leads in a text thread.
+You exist and you look legitimate.
+
+For a newer or solo operator who still answers his own phone.
 
 - SEO-built website, hosted and maintained
-- CRM and pipeline, configured to your jobs
+- CRM and pipeline configured to your jobs
+- Google Business Profile setup and optimization
+- Business email on your own domain
+- Project photo gallery, organized by service
+- Web chat widget with lead capture
 - Automatic review requests
-- Web and form lead capture
-- Site edits, up to two requests a month
+- Owner mobile app — run your pipeline from the truck
+- SSL, backups, and uptime monitoring
+- Monthly performance email
+- Two site edit requests a month
 
 ### Growth — $497/mo
 
-For a shop that's missing calls it can't afford to miss. **Most clients start here.**
+Nothing falls through the cracks. Most clients start here.
 
-- Everything in Foundation
-- AI call intake — answers, qualifies, books
-- Missed-call text-back
-- Full follow-up automation on quiet quotes and stale estimates
-- Call recording and monthly intake review
-- Pipeline reporting
+Everything in Foundation, plus everything that catches a lead the moment it comes in.
 
-### Full system — $797/mo
+- AI call intake — answers, qualifies, books the estimate
+- Missed-call text-back, instantly
+- 60-second response on every form, message, and call
+- Online booking against your real calendar
+- Automatic appointment reminders
+- Deposit collection by text
+- Follow-up automation on quotes that go quiet
+- One inbox for SMS, Facebook, Instagram, and Google
 
-For a shop that wants to own its market, not just keep up with it.
+### Full System — $797/mo
 
-- Everything in Growth
+You own your market.
+
+Everything in Growth, plus the work that grows your share instead of holding it.
+
 - Managed local SEO — Google Business Profile, citations, on-page
 - Service-area pages for every town you work in, expanded quarterly
 - Review response — we reply, you don't
-- Quarterly database reactivation campaigns against your existing list
+- Quarterly reactivation campaigns against your customer list
+- Call tracking and lead source reporting
 - Monthly report and a 30-minute strategy call
 - Priority support, same business day
 
@@ -309,14 +366,14 @@ and we'd rather quote that honestly than bury it in a plan.
 
 ---
 
-## 08 · Material band
+## 09 · Material band
 
 No copy over the band. Reserve if a caption is ever added, below the image, in
-monospace: `fig. 07 / equipment marking`
+monospace: `fig. 09 / equipment marking`
 
 ---
 
-## 09 · Final CTA
+## 10 · Final CTA
 
 **Headline**
 Let's find out what the phone is costing you.
@@ -330,7 +387,7 @@ leads are dying. If we're not the right fit, you keep the map.
 
 ---
 
-## 10 · Footer
+## 11 · Footer
 
 **Wordmark:** Giddens Systems
 
@@ -402,13 +459,13 @@ Body: Not your fault. Try again in a minute, or call us and we'll help directly.
 
 ## Replacement checklist
 
-- [ ] 02 — three proof numbers, verified
-- [ ] 04 — Donovan: real name, city, story, result, metric
-- [ ] 04 — screenshot captured and alt written
-- [ ] 05 — Marie: real name, city, story, result, metric
+- [ ] 03 — three proof numbers, verified
+- [ ] 05 — Donovan: real name, city, story, result, metric
 - [ ] 05 — screenshot captured and alt written
-- [x] 07 — build fee confirmed and final
-- [ ] 09/10 — real email and phone
+- [ ] 06 — Marie: real name, city, story, result, metric
+- [ ] 06 — screenshot captured and alt written
+- [x] 08 — build fee confirmed and final
+- [ ] 10/11 — real email and phone
 - [ ] Forms — real failure-path phone number
 - [ ] `npm run check:copy` passes
 - [ ] Both clients have seen and approved their case study before it goes live

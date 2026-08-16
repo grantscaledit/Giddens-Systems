@@ -11,24 +11,38 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<ul class="price-feature-list">
+<ul class="price-feature-list" role="list">
 	{items.map((item) => <li>{item}</li>)}
 </ul>
 
 <style>
+	/* Two columns, not one. The list used to sit in a 280px tier card where a
+	   single column was the only option. It now sits in a band at columns 5-12
+	   — roughly 700px — and the longest item measures about 290px, so a single
+	   column would leave 400px of empty rail on every line. That emptiness is
+	   the exact failure the band layout exists to fix. Multi-column rather than
+	   flex because the items are independent one-liners and column balancing is
+	   what makes eleven of them read as a block instead of a queue. */
 	.price-feature-list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-xs);
+		columns: 2;
+		column-gap: var(--grid-gap);
 		font-size: var(--size-small);
 	}
 
 	.price-feature-list li {
 		position: relative;
 		padding-inline-start: var(--space-md);
+		break-inside: avoid;
+		margin-block-end: var(--space-xs);
+	}
+
+	@media (max-width: 700px) {
+		.price-feature-list {
+			columns: 1;
+		}
 	}
 
 	.price-feature-list li::before {

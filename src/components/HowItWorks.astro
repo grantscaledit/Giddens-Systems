@@ -1,0 +1,101 @@
+---
+// Section 07 · How it works. Four steps, monospace-numbered, as a dense
+// ledger at full content width.
+//
+// Density is what separates this section from its neighbours, not layout
+// tricks. Sections 02, 04 and 07 are three enumerated lists in a row and each
+// one is set at a different pressure: 02 is airy and narrow, 04 is airy and
+// large, 07 is tight and small. Rows here are contiguous — separated only by
+// their hairlines, with no gap between them — while section 04's rows sit
+// --space-2xl apart. Four steps and three weeks should read fast.
+//
+// Two earlier versions failed. Four columns across read as a grid of cards,
+// because four equal boxes of text side by side is a card grid whether or not
+// the boxes have borders; removing the borders did not remove the shape.
+// Moving the heading into a left rail at columns 1-4 crowded it against the
+// steps and left the rail too narrow for a headline this long. The heading is
+// back on top at columns 1-8, matching every other section — the page has a
+// section-opening grammar and this section had no reason to break it.
+//
+// --space-2xl, the lightest padding on the page. Four short steps is the
+// least weight of any section here and the rhythm should say so.
+//
+// Zero --signal-500. Nothing in a process description is load-bearing enough
+// to mark, and pricing's first accent sits directly below this section.
+import Eyebrow from './Eyebrow.astro';
+import Rule from './Rule.astro';
+import DisplayHeading from './DisplayHeading.astro';
+import StepRow from './StepRow.astro';
+---
+
+<section id="how-it-works" class="how-it-works">
+	<div class="content">
+		<div class="process-eyebrow-row">
+			<Eyebrow label="fig. 07 / process" />
+		</div>
+		<div class="process-rule-row">
+			<Rule />
+		</div>
+
+		<DisplayHeading as="h2" class="process-heading">
+			Four steps. Three weeks, usually.
+		</DisplayHeading>
+
+		{/* role="list" — see Offer.astro. Safari drops list semantics when
+		    list-style is none. */}
+		<ol class="process-steps" role="list">
+			<StepRow index="01" title="Audit" variant="ledger">
+				Thirty minutes on a call. We map where leads come in, where they stall, and
+				where they die. You get the map whether or not you hire us.
+			</StepRow>
+			<StepRow index="02" title="Build" variant="ledger">
+				Site, pipeline, and intake, built against your actual jobs and your actual
+				pricing. You see it working before it touches a real customer.
+			</StepRow>
+			<StepRow index="03" title="Wire in" variant="ledger">
+				We point your phone number, your forms, and your inbox at the system, and
+				watch the first week of live traffic with you.
+			</StepRow>
+			<StepRow index="04" title="Hand off" variant="ledger">
+				A walkthrough, a written runbook, and a number to call. Monthly is
+				month-to-month. Nothing here is hostage.
+			</StepRow>
+		</ol>
+	</div>
+</section>
+
+<style>
+	.how-it-works {
+		padding-block: var(--space-2xl);
+	}
+
+	.process-eyebrow-row {
+		grid-column: 1 / 13;
+	}
+
+	.process-rule-row {
+		grid-column: 1 / 13;
+		margin-block: var(--space-lg);
+	}
+
+	.how-it-works :global(.process-heading) {
+		grid-column: 1 / 8;
+		margin-block-end: var(--space-xl);
+	}
+
+	/* Full content width, so each row's internal 12-column grid lands on the
+	   page grid's own lines. No gap between rows — the hairlines do the
+	   separating and the block reads as one table rather than four items. */
+	.process-steps {
+		grid-column: 1 / 13;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	@media (max-width: 700px) {
+		.how-it-works :global(.process-heading) {
+			grid-column: 1 / 13;
+		}
+	}
+</style>

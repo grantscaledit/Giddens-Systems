@@ -1,0 +1,160 @@
+---
+// Section 02 · We go first. The offer, and the most persuasive section on the
+// page.
+//
+// Sits on --bg-section rather than --bg-page. Depth from surface value, per
+// the direction — it reads as a distinct plate rather than more of the same
+// scroll, and it costs nothing from the accent budget to say so.
+//
+// Accent budget for this section, in full: the guarantee block's left border.
+// One, not two. The hero's primary CTA sits directly above this section, so a
+// viewport spanning that boundary already carries one before this section has
+// said anything — a second here would put that viewport at three. There is
+// deliberately no CTA in this section.
+//
+// The qualifier sits below the guarantee block and outside it. --steel-400
+// measures 4.66:1 on --steel-900 but only 3.76:1 on --bg-raised, so it cannot
+// move inside the block without failing the contrast floor.
+import Eyebrow from './Eyebrow.astro';
+import Rule from './Rule.astro';
+import DisplayHeading from './DisplayHeading.astro';
+import StepRow from './StepRow.astro';
+---
+
+<section id="offer" class="offer grain-surface">
+	<div class="content">
+		<div class="offer-eyebrow-row">
+			<Eyebrow label="fig. 02 / the offer" />
+		</div>
+		<div class="offer-rule-row">
+			<Rule />
+		</div>
+
+		<DisplayHeading as="h2" class="offer-heading">We go first.</DisplayHeading>
+
+		<div class="offer-body">
+			<p>
+				Most shops ask for two thousand dollars up front and hand you a website. We
+				don't.
+			</p>
+			<p>
+				Before we build anything, we run one campaign against the customers you
+				already have — past jobs, old quotes, anyone who ever called. Booked jobs
+				land on your calendar in the first two weeks. What that brings in pays for
+				the system we build next.
+			</p>
+		</div>
+
+		{/* role="list" because list-style:none strips list semantics in Safari
+		    with VoiceOver, and the count is the information in a numbered
+		    sequence. */}
+		<ol class="offer-steps" role="list">
+			<StepRow index="01" title="You hand us the list">
+				Past customers, old quotes, anyone who ever called for a price. However it's
+				stored.
+			</StepRow>
+			<StepRow index="02" title="We build the campaign">
+				Loaded into a CRM we configure for you, cleaned, and written in your voice —
+				not ours.
+			</StepRow>
+			<StepRow index="03" title="We run it">
+				Booked jobs on your calendar in the first two weeks. Not leads in an inbox.
+			</StepRow>
+			<StepRow index="04" title="It pays for the build">
+				Whatever the campaign produces covers the system we build next.
+			</StepRow>
+		</ol>
+
+		<div class="offer-guarantee">
+			<p class="offer-guarantee-text">
+				If that first campaign doesn't book at least $2,000 in work within 30 days,
+				you don't pay for the build. We finish it anyway.
+			</p>
+		</div>
+
+		<p class="mono offer-qualifier">
+			requires 150+ past customers &middot; list delivered within 3 business days
+			&middot; leads answered within 24 hours
+		</p>
+	</div>
+</section>
+
+<style>
+	.offer {
+		padding-block: var(--space-3xl);
+		background: var(--bg-section);
+	}
+
+	.offer-eyebrow-row {
+		grid-column: 1 / 13;
+	}
+
+	.offer-rule-row {
+		grid-column: 1 / 13;
+		margin-block: var(--space-lg);
+	}
+
+	.offer :global(.offer-heading) {
+		grid-column: 1 / 8;
+		margin-block-end: var(--space-md);
+	}
+
+	.offer-body {
+		grid-column: 1 / 8;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		margin-block-end: var(--space-xl);
+	}
+
+	.offer-steps {
+		grid-column: 1 / 10;
+		list-style: none;
+		margin: 0 0 var(--space-2xl);
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+	}
+
+	/* --space-2xl above, --space-md below: the guarantee is pushed away from
+	   the steps and the qualifier is pulled tight to the guarantee, so the two
+	   read as one closing unit rather than as two more list items. */
+	.offer-guarantee {
+		grid-column: 1 / 10;
+		background: var(--bg-raised);
+		border-left: var(--border-emphasis) solid var(--signal-500);
+		padding: var(--space-lg);
+		margin-block-end: var(--space-md);
+	}
+
+	/* --size-h2 in the body face, not the display face. The jump from
+	   --size-body is what carries the weight the guarantee needs; setting it
+	   in Archivo instead would make it compete with the section headline.
+	   Large text takes the tighter leading. */
+	.offer-guarantee-text {
+		font-size: var(--size-h2);
+		line-height: var(--leading-heading);
+		letter-spacing: var(--track-heading);
+		color: var(--text-display);
+	}
+
+	.offer-qualifier {
+		grid-column: 1 / 10;
+		max-width: none;
+	}
+
+	@media (max-width: 700px) {
+		.offer :global(.offer-heading),
+		.offer-body,
+		.offer-steps,
+		.offer-guarantee,
+		.offer-qualifier {
+			grid-column: 1 / 13;
+		}
+
+		.offer-guarantee {
+			padding: var(--space-md);
+		}
+	}
+</style>

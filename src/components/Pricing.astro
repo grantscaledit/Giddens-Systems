@@ -1,12 +1,49 @@
 ---
-// Section 07 · Pricing. Three tiers at 1/5, 5/9, 9/13 — not a fourth column
-// for "Bigger operation?", which would give an unpriced door the same visual
-// weight as a priced tier. It gets its own full-width block below instead.
+// Section 08 · Pricing. Three tiers as full-width horizontal bands, plus a
+// price-less "Bigger operation?" row that closes the table.
 //
-// Accent budget for this whole section, in full: the Growth tier's 1px
-// --signal-500 top border (PriceTier's `recommended` prop), and the section
-// CTA button fill. Nothing else here touches --signal-500 — not the prices,
-// not the tier names, not "Most clients start here."
+// This is the second of exactly two sections that break the page's
+// section-opening grammar — section 04 is the other. Sections 01, 02 and 07
+// keep the established opening (eyebrow → full-width rule → heading at 1-8 →
+// body at 1-8) so these two breaks read as decisions rather than as drift.
+//
+// The break here is a two-column split, not a rail: the eyebrow and the
+// opening hairline stay, and the heading at 1-6 sits beside the build-fee
+// paragraph at 7-13 instead of stacked above it. Section 04 uses a rail, so
+// the two breaks do not rhyme with each other either.
+//
+// The tiers were three bordered boxes at columns 1-5, 5-9 and 9-13 — the
+// pricing-card pattern from every SaaS template. A comparison matrix was
+// proposed as the replacement and rejected: the matrix is the *other*
+// canonical SaaS pricing pattern, so it would have failed the same test
+// harder, and it fights the copy. The tiers are written cumulatively
+// ("Everything in Foundation, plus…"), so a matrix has to repeat every feature
+// across all three columns to function — nineteen features become fifty-seven
+// cells. Bands keep the copy exactly as written: Growth's list is its eight
+// additions, and you read down the page while the system accretes.
+//
+// "Bigger operation?" is a single row under the last band rather than a fourth
+// box. It carries the group's closing hairline by being the last row with a
+// border-top, so no separate closing rule is needed — which is also what keeps
+// this section from rhyming with section 04, whose row block *is* bounded top
+// and bottom.
+//
+// Accent budget for this whole section, in full: the Growth band's 1px
+// --signal-500 top border (PriceTier's `recommended` prop). Nothing else here
+// touches --signal-500 — not the prices, not the tier names, not "Most clients
+// start here."
+//
+// One, not the two site-structure.md budgets for this section, because the
+// section CTA is outlined rather than filled. That doc assumes section 09's
+// material band sits between pricing and the final CTA; a full-bleed 21:9 band
+// is roughly 600px tall at 1440px and makes it impossible for both CTAs to
+// share a viewport. The band is blocked, they currently do share one, and two
+// identical filled buttons for the same action reads as a repeat rather than
+// as a close — even though two accents is within budget.
+//
+// Outlined here and filled at the close ranks the two CTAs instead of
+// duplicating one. **Revert this to `variant="primary"` when the material
+// band lands.**
 import Eyebrow from './Eyebrow.astro';
 import Rule from './Rule.astro';
 import DisplayHeading from './DisplayHeading.astro';
@@ -18,7 +55,7 @@ import PriceFeatureList from './PriceFeatureList.astro';
 <section id="pricing" class="pricing">
 	<div class="content">
 		<div class="pricing-eyebrow-row">
-			<Eyebrow label="fig. 06 / pricing" />
+			<Eyebrow label="fig. 08 / pricing" />
 		</div>
 		<div class="pricing-rule-row">
 			<Rule />
@@ -29,65 +66,86 @@ import PriceFeatureList from './PriceFeatureList.astro';
 		</DisplayHeading>
 
 		<p class="pricing-intro">
-			Every plan includes the build: an SEO-structured website, your CRM and pipeline
-			configured, and review requests running. The build is $1,997, or $997 on a
-			twelve-month agreement. Monthly is month-to-month after that.
+			Every plan starts with the build: your website, your CRM, and your automations
+			configured around your actual jobs. The build is $1,997 — and it's the part we
+			put at risk. If the first reactivation campaign doesn't book at least $2,000 in
+			work within 30 days, you don't pay for it. Monthly is month-to-month after that.
 		</p>
 
-		<div class="pricing-tier pricing-tier--foundation">
-			<PriceTier name="Foundation" price="$297/mo">
-				<p>For a shop that needs to get found and stop losing leads in a text thread.</p>
-				<PriceFeatureList
-					items={[
-						'SEO-built website, hosted and maintained',
-						'CRM and pipeline, configured to your jobs',
-						'Automatic review requests',
-						'Web and form lead capture',
-						'Site edits, up to two requests a month',
-					]}
-				/>
-			</PriceTier>
-		</div>
-
-		<div class="pricing-tier pricing-tier--growth">
-			<PriceTier name="Growth" price="$497/mo" recommended>
-				<p>
-					For a shop that's missing calls it can't afford to miss.{' '}
-					<strong class="pricing-emphasis">Most clients start here.</strong>
+		<div class="pricing-bands">
+			<PriceTier
+				name="Foundation"
+				price="$297/mo"
+				lead="You exist and you look legitimate."
+			>
+				<p class="tier-note">
+					For a newer or solo operator who still answers his own phone.
 				</p>
 				<PriceFeatureList
 					items={[
-						'Everything in Foundation',
-						'AI call intake — answers, qualifies, books',
-						'Missed-call text-back',
-						'Full follow-up automation on quiet quotes and stale estimates',
-						'Call recording and monthly intake review',
-						'Pipeline reporting',
+						'SEO-built website, hosted and maintained',
+						'CRM and pipeline configured to your jobs',
+						'Google Business Profile setup and optimization',
+						'Business email on your own domain',
+						'Project photo gallery, organized by service',
+						'Web chat widget with lead capture',
+						'Automatic review requests',
+						'Owner mobile app — run your pipeline from the truck',
+						'SSL, backups, and uptime monitoring',
+						'Monthly performance email',
+						'Two site edit requests a month',
 					]}
 				/>
 			</PriceTier>
-		</div>
 
-		<div class="pricing-tier pricing-tier--full">
-			<PriceTier name="Full system" price="$797/mo">
-				<p>For a shop that wants to own its market, not just keep up with it.</p>
+			<PriceTier
+				name="Growth"
+				price="$497/mo"
+				lead="Nothing falls through the cracks. Most clients start here."
+				recommended
+			>
+				<p class="tier-note">
+					Everything in Foundation, plus everything that catches a lead the moment it
+					comes in.
+				</p>
 				<PriceFeatureList
 					items={[
-						'Everything in Growth',
+						'AI call intake — answers, qualifies, books the estimate',
+						'Missed-call text-back, instantly',
+						'60-second response on every form, message, and call',
+						'Online booking against your real calendar',
+						'Automatic appointment reminders',
+						'Deposit collection by text',
+						'Follow-up automation on quotes that go quiet',
+						'One inbox for SMS, Facebook, Instagram, and Google',
+					]}
+				/>
+			</PriceTier>
+
+			<PriceTier
+				name="Full System"
+				price="$797/mo"
+				lead="You own your market."
+			>
+				<p class="tier-note">
+					Everything in Growth, plus the work that grows your share instead of holding
+					it.
+				</p>
+				<PriceFeatureList
+					items={[
 						'Managed local SEO — Google Business Profile, citations, on-page',
 						'Service-area pages for every town you work in, expanded quarterly',
 						"Review response — we reply, you don't",
-						'Quarterly database reactivation campaigns against your existing list',
+						'Quarterly reactivation campaigns against your customer list',
+						'Call tracking and lead source reporting',
 						'Monthly report and a 30-minute strategy call',
 						'Priority support, same business day',
 					]}
 				/>
 			</PriceTier>
-		</div>
 
-		<div class="pricing-enterprise">
-			<h3 class="pricing-enterprise-name">Bigger operation?</h3>
-			<p>
+			<p class="pricing-enterprise">
+				<span class="mono pricing-enterprise-label">bigger operation?</span>
 				Multiple locations, custom integrations, higher call volume, or something that
 				isn't on this list — that's a conversation, not a plan. Tell us what you're
 				running and we'll scope it.
@@ -95,7 +153,7 @@ import PriceFeatureList from './PriceFeatureList.astro';
 		</div>
 
 		<div class="pricing-cta">
-			<Button href="/contact" variant="primary">Book a systems audit</Button>
+			<Button href="/contact" variant="secondary">Book a systems audit</Button>
 		</div>
 
 		<p class="pricing-footnote">
@@ -119,66 +177,41 @@ import PriceFeatureList from './PriceFeatureList.astro';
 		margin-block: var(--space-lg);
 	}
 
+	/* 1-6 beside 7-13, not stacked at 1-8. This is the section-opening break —
+	   see the note at the top of this file. */
 	.pricing :global(.pricing-heading) {
-		grid-column: 1 / 8;
-		margin-block-end: var(--space-md);
+		grid-column: 1 / 7;
 	}
 
 	.pricing-intro {
-		grid-column: 1 / 8;
-		margin-block-end: var(--space-xl);
+		grid-column: 7 / 13;
+		max-width: none;
 	}
 
-	.pricing-tier {
-		/* CSS Grid's default align-items:stretch would force every card to the
-		   height of the tallest (Full system, 7 features), leaving Foundation
-		   with a dead gap below its 5th. align-self:start lets each card size
-		   to its own content instead — distinct card lengths for distinct
-		   content, the same principle ExplodedAssembly's parts already use. */
-		align-self: start;
-		margin-block-end: var(--space-lg);
-	}
-
-	.pricing-tier--foundation {
-		grid-column: 1 / 5;
-	}
-
-	.pricing-tier--growth {
-		grid-column: 5 / 9;
-	}
-
-	.pricing-tier--full {
-		grid-column: 9 / 13;
-	}
-
-	.pricing-enterprise {
+	.pricing-bands {
 		grid-column: 1 / 13;
-		border: var(--rule-weight) solid var(--rule);
-		border-radius: var(--radius-none);
-		padding: var(--space-lg) var(--space-md);
-		display: flex;
-		align-items: baseline;
-		gap: var(--space-lg);
-		margin-block-end: var(--space-xl);
+		margin-block: var(--space-2xl) var(--space-xl);
 	}
 
-	.pricing-enterprise-name {
-		font-family: var(--font-mono);
-		font-size: var(--size-mono);
-		font-weight: var(--weight-medium);
-		letter-spacing: var(--track-mono);
-		color: var(--text-display);
-		margin: 0;
-		flex-shrink: 0;
-	}
-
-	.pricing-enterprise p {
+	/* The last row of the table, not a fourth box. Its border-top is what
+	   closes the band group, so there is no separate closing rule. */
+	.pricing-enterprise {
+		border-top: var(--rule-weight) solid var(--rule);
+		padding-block-start: var(--space-lg);
 		color: var(--text-body);
 		max-width: none;
 	}
 
-	.pricing-emphasis {
+	.pricing-enterprise-label {
 		color: var(--text-display);
+		margin-inline-end: var(--space-2xs);
+	}
+
+	.tier-note {
+		color: var(--text-body);
+		font-size: var(--size-small);
+		margin-block-end: var(--space-md);
+		max-width: none;
 	}
 
 	.pricing-cta {
@@ -192,22 +225,27 @@ import PriceFeatureList from './PriceFeatureList.astro';
 		margin-block-start: var(--space-md);
 	}
 
-	@media (max-width: 700px) {
+	/* 900px, not 700px. Not a wrapping failure — measured at 768 the split
+	   still breaks the headline correctly on its two sentences. It is the
+	   intro beside it: at six columns the paragraph sets about 337px wide and
+	   runs ten lines next to a two-line heading, which is the thin-column look
+	   this whole pass exists to remove. Stacked at 768 the heading sets on one
+	   line at 527px and the intro runs five. */
+	@media (max-width: 900px) {
 		.pricing :global(.pricing-heading),
-		.pricing-intro,
-		.pricing-tier--foundation,
-		.pricing-tier--growth,
-		.pricing-tier--full,
-		.pricing-enterprise,
-		.pricing-cta,
-		.pricing-footnote {
+		.pricing-intro {
 			grid-column: 1 / 13;
 		}
 
-		.pricing-enterprise {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: var(--space-sm);
+		.pricing-intro {
+			margin-block-start: var(--space-md);
+		}
+	}
+
+	@media (max-width: 700px) {
+		.pricing-cta,
+		.pricing-footnote {
+			grid-column: 1 / 13;
 		}
 	}
 </style>

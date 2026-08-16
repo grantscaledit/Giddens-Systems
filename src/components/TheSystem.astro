@@ -1,0 +1,157 @@
+---
+// Section 04 · The system. One machine in three named parts.
+//
+// This section deliberately breaks the page's section-opening grammar. Every
+// other section opened eyebrow → full-width hairline → heading at columns 1-8
+// → body at 1-8, five in a row, which left every section's content in the left
+// half of the grid and the right half empty top to bottom. The direction
+// offers "columns 1-7 or 4-12" and only the first was ever in use, so
+// "asymmetric by default" had become "left-aligned always" — symmetry of a
+// different kind.
+//
+// Here the eyebrow, heading and intro sit in a rail at columns 1-7 and the
+// three part rows run at 7-13, so the section fills the right half of the grid
+// that the rest of the page never touches. Columns 1-7 is the placement the
+// direction offers alongside 4-12; it was simply never used.
+//
+// The opening hairline is vertical rather than horizontal — it is the rail's
+// right edge, and it runs the full height of the rows because the rail is a
+// stretched grid item. That is the break. The rule still separates two zones
+// the way a rule on a drawing does; it separates them across the page instead
+// of down it, which is why the horizontal opening rule is gone rather than
+// duplicated.
+//
+// This is one of exactly two sections that break the pattern — section 08 is
+// the other. Sections 01, 02 and 07 keep the established opening, so the two
+// breaks read as decisions rather than as inconsistency.
+//
+// The rows are bounded top and bottom: a hairline above each row, and a
+// closing hairline under the last, carried by the container. The earlier
+// version had no closing rule on the grounds that it would separate the
+// section from its own padding. With the rail in place it separates something
+// real — it closes the block the rail's vertical rule opens, and the three
+// parts read as one bounded assembly rather than as three loose rows.
+//
+// That closing rule is also what makes this section distinguishable from 07
+// without relying on gap size. Four structural differences now, not one:
+// rail versus on-top heading, stacked versus three-column rows, bounded versus
+// open-ended, --size-h2 part names versus --size-h3 step titles.
+//
+// Zero --signal-500 in this section. It is explanatory, not persuasive, and
+// there is nothing here that is load-bearing enough to mark. It also buys
+// headroom: section 02 spends its one accent at its closing block, directly
+// above this section's opening.
+import Eyebrow from './Eyebrow.astro';
+import DisplayHeading from './DisplayHeading.astro';
+import ServiceRow from './ServiceRow.astro';
+---
+
+<section id="the-system" class="the-system">
+	<div class="content">
+		<div class="system-rail">
+			<Eyebrow label="fig. 04 / the system" />
+
+			<DisplayHeading as="h2" class="system-heading">Three parts. One machine.</DisplayHeading>
+
+			<p class="system-intro">
+				Most shops sell you a website, or a CRM, or an answering service, and leave you
+				to connect them. Nothing connects. The lead comes in one door and dies in
+				another. We build the whole thing as one system, wired together, or we don't
+				build it. We don't start by selling you a website. We start with the customers
+				you already have.
+			</p>
+		</div>
+
+		<div class="system-rows">
+			<ServiceRow
+				index="01"
+				name="The front door"
+				closing="Not a brochure. The thing that puts you in front of someone searching at 9pm."
+			>
+				A website built to be found. Real local SEO structure, service-area pages for
+				every town you work in, fast enough to load on a job site with two bars.
+			</ServiceRow>
+
+			<ServiceRow
+				index="02"
+				name="The engine"
+				closing="Built in GoHighLevel, configured around your jobs and your pricing. You own it."
+			>
+				Every lead lands in one place with the whole history attached — where they came
+				from, what they asked for, what you quoted, what happened. Pipelines, automatic
+				follow-up on quotes that went quiet, review requests that go out when the job is
+				done instead of three weeks later.
+			</ServiceRow>
+
+			<ServiceRow
+				index="03"
+				name="The mouth"
+				closing="Answers every call, including the one at 9pm on a Sunday."
+			>
+				An answering service takes a message. Ours asks what the job is, whether it's in
+				your area, and when you can come look at it — then puts it on your calendar and
+				drops the record in the pipeline.
+			</ServiceRow>
+		</div>
+	</div>
+</section>
+
+<style>
+	.the-system {
+		padding-block: var(--space-3xl);
+	}
+
+	/* Stretched to the height of .system-rows by the grid's default
+	   align-items, which is what makes the border read as a rail running the
+	   length of the block rather than as an underline on the intro. */
+	/* Six columns, not four or five. Measured at 1440: "One machine." sets 415px
+	   wide at --size-display, and the headline has to break on its own sentence
+	   or it reads as "Three / parts. One / machine." — a break mid-sentence,
+	   which is the exact failure site-structure.md recorded when a left rail was
+	   tried on section 07. Four columns gave 317px of text and five gave 410px,
+	   both short. Six gives 504px, which clears 415 by enough that the break
+	   survives a font fallback.
+
+	   --size-display caps at 55.25px above a 1381px viewport and the content
+	   column caps at 1200px, so this is the tightest the pairing ever gets;
+	   below 1381px the type shrinks on 4vw while the rail stays fixed. */
+	.system-rail {
+		grid-column: 1 / 7;
+		border-right: var(--rule-weight) solid var(--rule);
+		padding-inline-end: var(--space-lg);
+	}
+
+	.the-system :global(.system-heading) {
+		margin-block: var(--space-md) var(--space-md);
+	}
+
+	.system-intro {
+		color: var(--text-body);
+	}
+
+	/* The closing hairline lives on the container, not on the last row — one
+	   declaration instead of piercing ServiceRow's scoped styles. Rows are
+	   contiguous; their own top borders do the separating. */
+	.system-rows {
+		grid-column: 7 / 13;
+		border-bottom: var(--rule-weight) solid var(--rule);
+	}
+
+	@media (max-width: 700px) {
+		/* The rail becomes a header again below 700px — there is no room for
+		   two columns, and a vertical rule with nothing beside it separates
+		   nothing. No horizontal rule replaces it: the first row's own
+		   border-top already sits on that exact boundary, and stacking a rail
+		   border on top of it draws the same separation twice. */
+		.system-rail {
+			grid-column: 1 / 13;
+			border-right: none;
+			padding-inline-end: 0;
+			padding-block-end: var(--space-lg);
+		}
+
+		.system-rows {
+			grid-column: 1 / 13;
+		}
+	}
+</style>

@@ -1,7 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import Offer from '../components/Offer.astro';
+import TheSystem from '../components/TheSystem.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import Pricing from '../components/Pricing.astro';
+import FinalCta from '../components/FinalCta.astro';
 
 const title = 'Giddens Systems | Websites, CRM, and AI call intake — McKinney TX';
 const description =
@@ -12,5 +16,12 @@ const description =
 
 <Base title={title} description={description}>
 	<Hero />
+	<Offer />
+	{/* 03 · Proof band — blocked on real numbers from Marie and AG Home Services */}
+	<TheSystem />
+	{/* 05 / 06 · Case studies — blocked on testimonial collection */}
+	<HowItWorks />
 	<Pricing />
+	{/* 09 · Material band — blocked on footage that was never shot */}
+	<FinalCta />
 </Base>

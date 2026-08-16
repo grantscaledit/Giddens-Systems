@@ -1,56 +1,95 @@
 ---
-// Tier block. Hairline border on all four sides, zero radius, no shadow, no
-// fill. The card shell only — tagline and feature list are composed by the
-// caller via the default slot, so this stays a pure shell.
+// One tier, as a full-width horizontal band. Explicitly not a card: no border
+// box, no fill on two of the three, hairline on top only.
 //
-// `name` is the h3 — the tier name is the heading, not the price (a price
-// read aloud as a heading breaks heading order for a screen reader). It gets
-// a monospace skin ("tier names in JetBrains Mono") layered on top of the
-// h3's own semantics, not a mono class swapped in for the tag.
+// The earlier version was three bordered boxes side by side at columns 1-5,
+// 5-9 and 9-13. That is the pricing-card pattern from every SaaS template; it
+// cleared the letter of the ban (no icons, no radius, no fill) and not its
+// intent. A comparison matrix was considered and rejected — the matrix is the
+// other canonical SaaS pricing pattern, and because the copy is cumulative
+// ("Everything in Foundation, plus…") a matrix would have to repeat all
+// nineteen features across three columns to work at all.
+//
+// The band keeps the cumulative copy as written. Growth's list is its eight
+// additions, not all nineteen, which is only readable because the bands stack
+// vertically in tier order — you read down and the system accretes.
+//
+// The band runs its own 12-column grid at full content width with the same
+// --grid-gap as .content, so its columns land exactly on the page grid's
+// columns. Head at 1-4, features at 5-12.
+//
+// `recommended` marks Growth: --bg-raised surface plus a 1px --signal-500 top
+// border, both carried by a pseudo-element that bleeds --space-md past the
+// content edge on each side. The fill needs inline padding or the tier name
+// sits flush against its own edge, and padding on the band itself would push
+// the band's internal grid out of alignment with every other band and with the
+// section heading above. Bleeding the fill outward instead keeps all four
+// bands on the same grid lines and makes the marked row read as physically
+// wider than its neighbours — which is what marking is.
+//
+// --border-emphasis, not --rule-weight: a half-pixel accent line is invisible
+// on a dark surface, and this is the section's only --signal-500.
+//
+// `name` is the h3 — the tier name is the heading, not the price (a price read
+// aloud as a heading breaks heading order for a screen reader). It gets a
+// monospace skin layered on top of the h3's own semantics.
 //
 // `price` is styled text, not a heading: Archivo, the wdth axis, and
-// --size-h2 pulled directly as CSS values (not via the h2/h3 element rule),
-// so it reads at the same scale the spec asks for without claiming a heading
-// slot that belongs to the tier name.
-//
-// `recommended` marks Growth: --bg-raised surface plus a single 1px
-// --signal-500 top border. --border-emphasis, not --rule-weight — a
-// half-pixel accent line is invisible on a dark surface, and this is one of
-// the section's two orange appearances, so it has to actually be seen.
+// --size-h2 pulled directly as CSS values, so it reads at the scale the spec
+// asks for without claiming a heading slot that belongs to the tier name.
 interface Props {
 	name: string;
-	price?: string;
+	price: string;
+	lead: string;
 	recommended?: boolean;
 }
 
-const { name, price, recommended = false } = Astro.props;
+const { name, price, lead, recommended = false } = Astro.props;
 ---
 
-<div class={`price-tier ${recommended ? 'price-tier--recommended' : ''}`}>
-	<h3 class="price-tier-name">{name}</h3>
-	{price && <p class="price-tier-price">{price}</p>}
-	<div class="price-tier-body">
+<div class:list={['price-band', recommended && 'price-band--recommended']}>
+	<div class="price-band-head">
+		<h3 class="price-band-name">{name}</h3>
+		<p class="price-band-price">{price}</p>
+		<p class="price-band-lead">{lead}</p>
+	</div>
+
+	<div class="price-band-body">
 		<slot />
 	</div>
 </div>
 
 <style>
-	.price-tier {
-		border: var(--rule-weight) solid var(--rule);
-		border-radius: var(--radius-none);
-		padding: var(--space-lg) var(--space-md);
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-sm);
-		height: 100%;
+	.price-band {
+		display: grid;
+		/* minmax(0, 1fr) for the same reason .content uses it — see Base.astro. */
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		column-gap: var(--grid-gap);
+		border-top: var(--rule-weight) solid var(--rule);
+		padding-block: var(--space-lg);
+		position: relative;
+		isolation: isolate;
 	}
 
-	.price-tier--recommended {
+	/* Bleeds --space-md past the content edge on both sides so the fill has
+	   inline padding without the band's grid moving. z-index -1 paints it
+	   behind the band's in-flow content but, thanks to `isolation: isolate`
+	   above, still in front of the page background. */
+	.price-band--recommended::before {
+		content: '';
+		position: absolute;
+		inset-block: 0;
+		inset-inline: calc(var(--space-md) * -1);
 		background: var(--bg-raised);
 		border-top: var(--border-emphasis) solid var(--signal-500);
+		z-index: -1;
 	}
 
-	.price-tier-name {
+	.price-band-head {
+		grid-column: 1 / 5;
+	}
+
+	.price-band-name {
 		font-family: var(--font-mono);
 		font-size: var(--size-mono);
 		font-weight: var(--weight-medium);
@@ -59,7 +98,7 @@ const { name, price, recommended = false } = Astro.props;
 		margin: 0;
 	}
 
-	.price-tier-price {
+	.price-band-price {
 		font-family: var(--font-display);
 		font-variation-settings: 'wdth' var(--display-width);
 		font-weight: var(--weight-display);
@@ -67,17 +106,41 @@ const { name, price, recommended = false } = Astro.props;
 		line-height: var(--leading-heading);
 		letter-spacing: var(--track-heading);
 		color: var(--text-display);
-		margin: 0;
+		margin-block: var(--space-2xs) var(--space-xs);
 	}
 
-	.price-tier-body {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-md);
-		margin-block-start: var(--space-xs);
+	.price-band-lead {
+		color: var(--text-display);
+		font-size: var(--size-small);
 	}
 
-	.price-tier-body :global(p) {
-		max-width: none;
+	.price-band-body {
+		grid-column: 5 / 13;
+	}
+
+	/* 900px, matching the section's opening split. Measured at 768: the head
+	   column falls to 219px and the body to 455px, so the feature list's two
+	   columns are 227px each and six of Growth's eight items wrap to two or
+	   three lines. The list stops reading as a spec sheet and starts reading
+	   as shredded prose. Stacked, the head becomes a caption over a
+	   full-width list and the items go back to one or two lines. */
+	@media (max-width: 900px) {
+		.price-band {
+			grid-template-columns: 1fr;
+			row-gap: var(--space-md);
+		}
+
+		.price-band-head,
+		.price-band-body {
+			grid-column: 1;
+		}
+	}
+
+	@media (max-width: 700px) {
+		/* The bleed collapses to the page gutter below 700px — --space-md of
+		   overhang would sit outside the viewport at 375. */
+		.price-band--recommended::before {
+			inset-inline: calc(var(--gutter) * -1);
+		}
 	}
 </style>

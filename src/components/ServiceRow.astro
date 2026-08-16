@@ -1,0 +1,66 @@
+---
+// One named part of the machine. A stacked editorial block, explicitly not a
+// card and no longer a two-column row: hairline on top, no border on the other
+// three sides, no fill, no padding box.
+//
+// The earlier version split index+name into one column and description+closing
+// into another, which made this component and StepRow's `ledger` variant read
+// as the same table twice — mono index at the left edge, bold title, copy
+// starting at column 5, hairline above. Density alone did not separate them.
+// Stacking the four parts down a single column does, and it lets the section
+// sit in the right two-thirds of the grid beside its rail.
+//
+// The row no longer runs its own 12-column grid. It sits inside the section's
+// rows container at columns 5-13 and fills it; the page grid is established by
+// the rail beside it, not repeated in here.
+//
+// The part name keeps the h3 element's default --size-h2. StepRow's titles are
+// held down to --size-h3, so the parts of the machine read as larger than the
+// steps of a process — which is the correct ranking.
+//
+// The closing line takes --text-display against the description's --text-body.
+// It's the punch line of the row and the value step is what makes it read as
+// one.
+interface Props {
+	index: string;
+	name: string;
+	closing: string;
+}
+
+const { index, name, closing } = Astro.props;
+---
+
+<div class="service-row">
+	<span class="mono service-row-index">{index}</span>
+	<h3 class="service-row-name">{name}</h3>
+	<p class="service-row-desc"><slot /></p>
+	<p class="service-row-closing">{closing}</p>
+</div>
+
+<style>
+	.service-row {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		border-top: var(--rule-weight) solid var(--rule);
+		padding-block: var(--space-lg);
+	}
+
+	.service-row-index {
+		margin-block-end: var(--space-2xs);
+	}
+
+	.service-row-name {
+		margin: 0;
+	}
+
+	.service-row-desc {
+		color: var(--text-body);
+		margin-block-start: var(--space-md);
+	}
+
+	.service-row-closing {
+		color: var(--text-display);
+		margin-block-start: var(--space-md);
+	}
+</style>

@@ -1,0 +1,76 @@
+---
+// Section 10 · Final CTA. The single centered element on the site. Everything
+// above it is asymmetric, which is what makes centering read as an ending
+// rather than as a default.
+//
+// No eyebrow, deliberately. Every other section opens with a monospace label
+// over a hairline; the absence of one here is what marks this section as
+// terminal rather than as another entry in the sequence.
+//
+// --bg-section with grain, matching section 02. Those two are the only places
+// the page asks for something, and giving them the same surface makes the
+// pairing structural.
+//
+// One --signal-500: the button. Section 08's CTA is the nearest accent above
+// it, with section 09's material band still to land between them — until it
+// does, that gap is the pairing to measure at 1440x900.
+import DisplayHeading from './DisplayHeading.astro';
+import Button from './Button.astro';
+---
+
+<section class="final-cta grain-surface">
+	<div class="content">
+		<div class="cta-inner">
+			<DisplayHeading as="h2" class="cta-heading">
+				Let's find out what the phone is costing you.
+			</DisplayHeading>
+
+			<p class="cta-body">
+				Thirty minutes, no charge, no pitch deck. We map your intake and show you
+				where leads are dying. If we're not the right fit, you keep the map.
+			</p>
+
+			<div class="cta-action">
+				<Button href="/contact" variant="primary">Book a systems audit</Button>
+			</div>
+
+			<p class="mono cta-qualifier">no charge / 30 min / mckinney tx</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.final-cta {
+		padding-block: var(--space-4xl);
+		background: var(--bg-section);
+	}
+
+	/* Columns 3-11: a centered span of eight, not the full twelve. Centered
+	   text across the whole content width would run past --measure and read
+	   as a banner rather than as a close. */
+	.cta-inner {
+		grid-column: 3 / 11;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.final-cta :global(.cta-heading) {
+		margin-block-end: var(--space-md);
+	}
+
+	.cta-body {
+		margin-block-end: var(--space-xl);
+	}
+
+	.cta-action {
+		margin-block-end: var(--space-md);
+	}
+
+	@media (max-width: 700px) {
+		.cta-inner {
+			grid-column: 1 / 13;
+		}
+	}
+</style>

@@ -50,7 +50,15 @@ const devPlaceholderStyles = import.meta.env.DEV
 		margin-inline: auto;
 		padding-inline: var(--gutter);
 		display: grid;
-		grid-template-columns: repeat(12, 1fr);
+		/* minmax(0, 1fr), not 1fr. A bare 1fr carries an automatic min-content
+		   floor, so a wide item in one span steals width from the others and
+		   the twelve columns stop being twelve equal columns. It only shows up
+		   when the page gets tight: at 768px the pricing intro at 7-13 squeezed
+		   the heading at 1-7 down to about 150px and "Build it once. Keep it
+		   running." broke onto six lines. Every "columns 1-8" in this codebase
+		   means equal columns, so this is the correction, not a new behaviour.
+		   site-structure.md records the same trap in section 07's ledger. */
+		grid-template-columns: repeat(12, minmax(0, 1fr));
 		column-gap: var(--grid-gap);
 	}
 
